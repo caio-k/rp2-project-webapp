@@ -1,4 +1,6 @@
-# React WebApp 
+# RP2 Project Webapp
+
+### This project is part of the Problem Based Learning (pt: Resolução de Problemas) subject at the University of São Paulo (USP).
 
 ## Project setup
 
