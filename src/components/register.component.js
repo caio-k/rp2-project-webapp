@@ -53,10 +53,12 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
 
     this.state = {
       username: "",
       email: "",
+      role: "user",
       password: "",
       successful: false,
       message: ""
@@ -81,6 +83,12 @@ export default class Register extends Component {
     });
   }
 
+  onChangeRole(e) {
+    this.setState({
+      role: e.target.value
+    })
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -92,9 +100,13 @@ export default class Register extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
+      const role = ["user"];
+      if (this.state.role === "admin") role.push("admin");
+
       AuthService.register(
         this.state.username,
         this.state.email,
+        role,
         this.state.password
       ).then(
         response => {
@@ -160,6 +172,28 @@ export default class Register extends Component {
                     onChange={this.onChangeEmail}
                     validations={[required, email]}
                   />
+                </div>
+
+                <div className="form-group" onChange={this.onChangeRole}>
+                  <p className="col-form-label">Role</p>
+                  <div className="form-check form-check-inline">
+                    <Input id="userRole"
+                           type="radio"
+                           name="role"
+                           checked={true}
+                           value="user"
+                           className="form-check-input"/>
+                    <label className="form-check-label" htmlFor="userRole">Teacher</label>
+                  </div>
+
+                  <div className="form-check form-check-inline ml-2">
+                    <Input id="userAdmin"
+                           type="radio"
+                           name="role"
+                           value="admin"
+                           className="form-check-input"/>
+                    <label className="form-check-label" htmlFor="userAdmin">School principal</label>
+                  </div>
                 </div>
 
                 <div className="form-group">
