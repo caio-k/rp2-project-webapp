@@ -1,13 +1,11 @@
-import axios from 'axios';
-import authHeader from './auth-header';
+import serverApi from '../api/server-api'
 
-const API_URL = 'http://localhost:8080/api/school/';
+const PATH_API = '/api/school/';
 
 class SchoolService {
 
   listAllSchoolsByUsername(username) {
-    return axios.get(API_URL + 'allSchoolsByUser', {
-      headers: authHeader(),
+    return serverApi.get(PATH_API + 'allSchoolsByUser', {
       params: {
         username: username
       }
@@ -15,8 +13,7 @@ class SchoolService {
   }
 
   listAdminSchoolByUsername(username) {
-    return axios.get(API_URL + 'adminSchool', {
-      headers: authHeader(),
+    return serverApi.get(PATH_API + 'adminSchool', {
       params: {
         username: username
       }
@@ -24,20 +21,16 @@ class SchoolService {
   }
 
   createSchool(schoolName,  schoolPrincipalUsername) {
-    return axios.post(API_URL + 'create', {
+    return serverApi.post(PATH_API + 'create', {
       schoolName,
       schoolPrincipalUsername
-    }, {
-      headers: authHeader()
     });
   }
 
   updateSchool(schoolId, schoolName) {
-    return axios.put(API_URL + 'update', {
+    return serverApi.put(PATH_API + 'update', {
       schoolId,
       schoolName
-    }, {
-      headers: authHeader()
     });
   }
 }
