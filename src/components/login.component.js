@@ -5,6 +5,9 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
 
+import "../styles/login.css"
+import profilePic from "../profile_pic.svg"
+
 const required = value => {
   if (!value) {
     return (
@@ -89,7 +92,7 @@ export default class Login extends Component {
       <div className="col-md-12">
         <div className="card card-container">
           <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            src={profilePic}
             alt="profile-img"
             className="profile-img-card"
           />
@@ -101,11 +104,12 @@ export default class Login extends Component {
             }}
           >
             <div className="form-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username" className="description">Username</label>
               <Input
                 type="text"
                 className="form-control"
                 name="username"
+                autoComplete="off"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
@@ -113,7 +117,7 @@ export default class Login extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" className="description">Password</label>
               <Input
                 type="password"
                 className="form-control"
@@ -126,11 +130,11 @@ export default class Login extends Component {
 
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="submitButton btn btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
+                  <span className="spinner-border spinner-border-sm"/>
                 )}
                 <span>Login</span>
               </button>
