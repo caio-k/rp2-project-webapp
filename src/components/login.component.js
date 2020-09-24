@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
 
-import "../styles/login.css"
+import "../styles/public_form.css"
 import profilePic from "../profile_pic.svg"
 
 const required = value => {
@@ -109,7 +109,6 @@ export default class Login extends Component {
                 type="text"
                 className="form-control"
                 name="username"
-                autoComplete="off"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
