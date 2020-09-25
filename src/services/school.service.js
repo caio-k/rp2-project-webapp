@@ -4,6 +4,14 @@ const PATH_API = '/api/school/';
 
 class SchoolService {
 
+  getCurrentSchool() {
+    return JSON.parse(localStorage.getItem('school'));
+  }
+
+  setCurrentSchool(school) {
+    localStorage.setItem("school", JSON.stringify(school));
+  }
+
   listAllSchoolsByUsername(username) {
     return serverApi.get(PATH_API + 'allSchoolsByUser', {
       params: {
