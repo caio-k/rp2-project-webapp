@@ -1,19 +1,23 @@
-import axios from 'axios';
-import authHeader from './auth-header';
+import serverApi from '../api/server-api'
 
-const API_URL = 'http://localhost:8080/api/test/';
+const PATH_URL = '/api/user/';
 
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
+
+  addSchool(schoolId, username) {
+    return serverApi.post(PATH_URL + 'addSchool', {
+      schoolId,
+      username
+    });
   }
 
-  getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
-  }
-
-  getAdminBoard() {
-    return axios.get(API_URL + 'admin', { headers: authHeader() });
+  removeSchool(schoolId, username) {
+    return serverApi.delete(PATH_URL + 'removeSchool', {
+      data: {
+        schoolId,
+        username
+      }
+    });
   }
 }
 

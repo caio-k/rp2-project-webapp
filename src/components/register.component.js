@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import {isEmail} from "validator";
 
 import AuthService from "../services/auth.service";
+
+import "../styles/public_form.css"
+import profilePic from "../profile_pic.svg"
 
 const required = value => {
   if (!value) {
@@ -53,10 +56,12 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
 
     this.state = {
       username: "",
       email: "",
+      role: "user",
       password: "",
       successful: false,
       message: ""
@@ -81,6 +86,12 @@ export default class Register extends Component {
     });
   }
 
+  onChangeRole(e) {
+    this.setState({
+      role: e.target.value
+    })
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -92,9 +103,13 @@ export default class Register extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
+      const role = ["user"];
+      if (this.state.role === "admin") role.push("admin");
+
       AuthService.register(
         this.state.username,
         this.state.email,
+        role,
         this.state.password
       ).then(
         response => {
@@ -125,7 +140,7 @@ export default class Register extends Component {
       <div className="col-md-12">
         <div className="card card-container">
           <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            src={profilePic}
             alt="profile-img"
             className="profile-img-card"
           />
@@ -139,7 +154,7 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
+                  <label htmlFor="username" className="description">Username</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -151,7 +166,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email" className="description">Email</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -163,7 +178,29 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <p className="pb-0 col-form-label description">Role</p>
+                  <div className="mr-54 form-check-inline">
+                    <label className="form-check-label">
+                      <input type="radio"
+                             className="form-check-input"
+                             value="user"
+                             checked={this.state.role === "user"}
+                             onChange={this.onChangeRole}/>Teacher
+                    </label>
+                  </div>
+                  <div className="form-check-inline">
+                    <label className="form-check-label">
+                      <input type="radio"
+                             className="form-check-input"
+                             value="admin"
+                             checked={this.state.role === "admin"}
+                             onChange={this.onChangeRole}/>School principal
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password" className="description">Password</label>
                   <Input
                     type="password"
                     className="form-control"
@@ -175,7 +212,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block">Sign Up</button>
+                  <button className="submitButton btn btn-block">Sign Up</button>
                 </div>
               </div>
             )}
@@ -195,7 +232,7 @@ export default class Register extends Component {
               </div>
             )}
             <CheckButton
-              style={{ display: "none" }}
+              style={{display: "none"}}
               ref={c => {
                 this.checkBtn = c;
               }}
