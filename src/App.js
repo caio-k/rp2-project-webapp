@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import logo from "./logo-safeschool-lateral.svg"
+
 import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
@@ -52,9 +54,14 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to={"/"} className="navbar-brand">
-              SafeSchool
+              <img
+                src={logo}
+                alt="SafeSchool"
+                width="190"
+                height="60"
+              />
             </Link>
             <button className="navbar-toggler" type="button" onClick={this.toggleMenu}>
               <span className="navbar-toggler-icon"/>
