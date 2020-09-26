@@ -1,11 +1,11 @@
-import axios from "axios";
+import serverApi from '../api/server-api'
 
-const API_URL = "http://localhost:8080/api/auth/";
+const PATH_API = "/api/auth/";
 
 class AuthService {
   login(username, password) {
-    return axios
-      .post(API_URL + "signin", {
+    return serverApi
+      .post(PATH_API + "signin", {
         username,
         password
       })
@@ -24,7 +24,7 @@ class AuthService {
   }
 
   register(username, email, role, password) {
-    return axios.post(API_URL + "signup", {
+    return serverApi.post(PATH_API + "signup", {
       username,
       email,
       role,
