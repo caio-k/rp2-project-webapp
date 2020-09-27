@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import logo from "./logo-safeschool-lateral.svg"
+import logo from "./logo-safeschool-lateral-tst1.svg"
 
 import AuthService from "./services/auth.service";
 
