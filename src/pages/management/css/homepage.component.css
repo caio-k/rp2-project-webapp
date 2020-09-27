@@ -1,0 +1,29 @@
+.card-option{
+
+    background: #00bfa6;
+    color: white;
+    border-radius: 15px;
+    width: 250px;
+    height: 300px;
+    font-size: 15px;
+    padding: 10px;
+    padding-top: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+
+    box-shadow: inset 0 0 1em gray, 0px 0px 10px 0px black;
+}
+
+.card-option h1{
+    font-size: 20px;
+}
+
+.card-option img{
+    max-width: 170px;
+}
+
+
