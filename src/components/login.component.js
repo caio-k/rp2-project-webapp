@@ -110,6 +110,7 @@ export default class Login extends Component {
                 className="form-control"
                 name="username"
                 value={this.state.username}
+                autoComplete="off"
                 onChange={this.onChangeUsername}
                 validations={[required]}
               />
