@@ -1,0 +1,13 @@
+.form-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #00BFA6;
+}
+
+.submit-button {
+    background-color: #00BFA6;
+    color: #FFF;
+}

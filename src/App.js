@@ -8,14 +8,10 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
+import BoardAdmin from "./components/management/board-admin.component";
 import BoardExit from "./components/board-exit.component";
 import BoardPlace from "./components/board-place.component";
 import BoardSchool from "./components/board-school.component";
-
-
-import BoardAdmin from "./components/board-admin.component";
-import ManagementHome from "./pages/management/homepage.component";
-import ManagementNewSchool from "./pages/management/new-school.component";
 
 class App extends Component {
   constructor(props) {
@@ -137,18 +133,12 @@ class App extends Component {
           <div className="container mt-3">
             <Switch>
               <Route exact path={["/", "/home"]} component={Home}/>
-
               <Route exact path="/login" component={Login}/>
               <Route exact path="/register" component={Register}/>
-
               <Route path="/school" component={BoardSchool}/>
-
               <Route path="/place" component={BoardPlace}/>
-
               <Route path="/exit" component={BoardExit}/>
-
-              <Route path="/admin" component={ManagementHome}/>
-              <Route path="/admin-new-school" component={ManagementNewSchool}/>
+              <Route path="/admin" component={BoardAdmin}/>
             </Switch>
           </div>
         </div>
