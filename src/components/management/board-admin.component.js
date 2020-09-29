@@ -25,6 +25,11 @@ export default class BoardAdmin extends Component {
             school: response.data
           });
         }
+      },
+      () => {
+        this.setState({
+          school: {}
+        });
       }
     );
   }
