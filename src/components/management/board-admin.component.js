@@ -7,7 +7,7 @@ import BoardAdminPlaces from "./board-admin-places.component";
 import BoardAdminExits from "./board-admin-exits.component";
 import BoardAdminSchool from "./board-admin-school.component";
 
-import "../../styles/management.css"
+import "../../styles/management/management.css"
 
 export default class BoardAdmin extends Component {
 

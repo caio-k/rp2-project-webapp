@@ -1,0 +1,12 @@
+.boards-admin-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.boards-admin-school-input {
+    width: calc(100% - 80px);
+}
+
+.boards-admin-school-message {
+    margin: 0 auto;
+}
