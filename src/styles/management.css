@@ -11,3 +11,25 @@
     background-color: #00BFA6;
     color: #FFF;
 }
+
+.boards-admin {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.cards-admin {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 250px;
+    background-color: red;
+}
+
+.row-board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

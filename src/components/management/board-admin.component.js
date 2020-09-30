@@ -2,6 +2,12 @@ import React, {Component} from "react";
 import AuthService from "../../services/auth.service";
 import SchoolService from "../../services/school.service"
 import NewSchool from "./new-school.component"
+import BoardAdminUsers from "./board-admin-users.component";
+import BoardAdminPlaces from "./board-admin-places.component";
+import BoardAdminExits from "./board-admin-exits.component";
+import BoardAdminSchool from "./board-admin-school.component";
+
+import "../../styles/management.css"
 
 export default class BoardAdmin extends Component {
 
@@ -38,13 +44,22 @@ export default class BoardAdmin extends Component {
     const {school} = this.state;
 
     return (
-      <div>
+      <div className="boards-admin">
         {!school.id && (
           <NewSchool/>
         )}
 
         {school.id && (
-          <span> board admin </span>
+          <>
+            <div className="row-board">
+              <BoardAdminUsers/>
+              <BoardAdminPlaces/>
+            </div>
+            <div className="row-board">
+              <BoardAdminExits/>
+              <BoardAdminSchool/>
+            </div>
+          </>
         )}
       </div>
     );
