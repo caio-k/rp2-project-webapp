@@ -5,6 +5,7 @@ import Pencil from "../../assets/pencil.svg"
 import Check from "../../assets/check.svg"
 
 import "../../styles/management/board-admin-school.css"
+import MessageAlert from "./message-alert.component";
 
 export default class BoardAdminSchool extends Component {
 
@@ -14,21 +15,12 @@ export default class BoardAdminSchool extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
 
     this.state = {
-      schoolName: "",
-      school: {},
+      schoolName: this.props.school.name,
+      school: this.props.school,
       disabledInput: true,
       message: "",
       updatedStatus: false
     };
-  }
-
-  componentDidMount() {
-    const currentSchool = SchoolService.getCurrentSchool();
-
-    this.setState({
-      schoolName: currentSchool.name,
-      school: currentSchool
-    });
   }
 
   onChangeSchoolName(e) {
@@ -88,6 +80,10 @@ export default class BoardAdminSchool extends Component {
           <span>School</span>
         </div>
 
+        {this.state.message && (
+          <MessageAlert success={this.state.updatedStatus} message={this.state.message}/>
+        )}
+
         <form className="form-inline">
           <div className="boards-admin-school-input form-group m-2">
             <input
@@ -105,18 +101,6 @@ export default class BoardAdminSchool extends Component {
               className="boards-admin-icon"
             />
           </button>
-
-          {this.state.message && (
-            <div className="boards-admin-school-message">
-              <div className={
-                this.state.updatedStatus
-                  ? "alert alert-success mx-2 fontsize-13"
-                  : "alert alert-danger mx-2 fontsize-13"
-              }>
-                {this.state.message}
-              </div>
-            </div>
-          )}
         </form>
       </div>
     );

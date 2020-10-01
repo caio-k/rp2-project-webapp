@@ -52,12 +52,12 @@ export default class BoardAdmin extends Component {
         {school.id && (
           <>
             <div className="row-board">
-              <BoardAdminUsers/>
+              <BoardAdminUsers school={school}/>
               <BoardAdminPlaces/>
             </div>
             <div className="row-board">
               <BoardAdminExits/>
-              <BoardAdminSchool/>
+              <BoardAdminSchool school={school}/>
             </div>
           </>
         )}

@@ -24,10 +24,14 @@
     display: flex;
     color: #FFF;
     font-size: 16px;
-    margin-bottom: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 10px;
     background-color: #00BFA6;
+}
+
+.boards-admin-header span {
+    display: flex;
 }
 
 .cards-admin {
@@ -37,6 +41,7 @@
     margin: 20px;
     min-width: 300px;
     min-height: 250px;
+    max-height: 250px;
     background-color: #ecf0f1;
 }
 
@@ -47,5 +52,19 @@
 }
 
 .fontsize-13 {
+    font-size: 13px;
+}
+
+.delete-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 16px;
+}
+
+.message-alert {
+    max-height: 40px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
     font-size: 13px;
 }
