@@ -20,6 +20,14 @@ class SchoolService {
     });
   }
 
+  listAllTeachersBySchoolId(schoolId) {
+    return serverApi.get(PATH_API + 'allUsersBySchool', {
+      params: {
+        schoolId: schoolId
+      }
+    });
+  }
+
   listAdminSchoolByUsername(username) {
     return serverApi.get(PATH_API + 'adminSchool', {
       params: {
