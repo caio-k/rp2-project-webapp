@@ -1,8 +1,8 @@
 .board {
     display: flex;
     flex-wrap: wrap;
-    border-radius: 10px;
-    background-color: #ecf0f1;
+    border-radius: 200px;
+    background-color: #e4fff6;
     align-items: center;
     justify-content: center;
 }
