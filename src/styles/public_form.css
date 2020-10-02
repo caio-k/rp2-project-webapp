@@ -1,14 +1,18 @@
 .description {
-    color: #00BFA6;
+    color: #00473C;
+    margin-left: 5px;
+    font-weight: 600;
 }
 
 .submitButton {
-    background-color: #00BFA6;
-    color: #FFF;
+    background-color: #008e78;
+    color: #FFFFFF;
+    font-weight: 600;
 }
 
 .mr-54 {
     margin-right: 54px;
+
 }
 
 input:-webkit-autofill,

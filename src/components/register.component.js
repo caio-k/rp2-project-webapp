@@ -160,6 +160,7 @@ export default class Register extends Component {
                     className="form-control"
                     name="username"
                     value={this.state.username}
+                    autoComplete="off"
                     onChange={this.onChangeUsername}
                     validations={[required, vusername]}
                   />
@@ -172,6 +173,7 @@ export default class Register extends Component {
                     className="form-control"
                     name="email"
                     value={this.state.email}
+                    autoComplete="off"
                     onChange={this.onChangeEmail}
                     validations={[required, email]}
                   />
