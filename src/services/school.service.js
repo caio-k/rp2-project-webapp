@@ -20,6 +20,14 @@ class SchoolService {
     });
   }
 
+  listAllTeachersBySchoolId(schoolId) {
+    return serverApi.get(PATH_API + 'allUsersBySchool', {
+      params: {
+        schoolId: schoolId
+      }
+    });
+  }
+
   listAdminSchoolByUsername(username) {
     return serverApi.get(PATH_API + 'adminSchool', {
       params: {
@@ -28,11 +36,19 @@ class SchoolService {
     })
   }
 
-  createSchool(schoolName,  schoolPrincipalUsername) {
-    return serverApi.post(PATH_API + 'create', {
-      schoolName,
-      schoolPrincipalUsername
-    });
+  createSchool(schoolName, schoolPrincipalUsername) {
+    return serverApi
+      .post(PATH_API + 'create', {
+        schoolName,
+        schoolPrincipalUsername
+      })
+      .then(response => {
+        if (response.data) {
+          this.setCurrentSchool(response.data);
+        }
+
+        return response.data;
+      });
   }
 
   updateSchool(schoolId, schoolName) {

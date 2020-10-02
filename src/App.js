@@ -8,7 +8,7 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
-import BoardAdmin from "./components/board-admin.component";
+import BoardAdmin from "./components/management/board-admin.component";
 import BoardExit from "./components/board-exit.component";
 import BoardPlace from "./components/board-place.component";
 import BoardSchool from "./components/board-school.component";
