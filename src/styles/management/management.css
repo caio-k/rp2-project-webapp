@@ -16,6 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     border-radius: 10px;
+    justify-content: center;
 }
 
 .boards-admin-header {
@@ -55,10 +56,13 @@
     font-size: 13px;
 }
 
-.delete-icon {
+.margin-left-16 {
+    margin-left: 16px;
+}
+
+.boards-admin-icon {
     width: 16px;
     height: 16px;
-    margin-left: 16px;
 }
 
 .message-alert {

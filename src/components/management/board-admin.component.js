@@ -6,8 +6,9 @@ import BoardAdminUsers from "./board-admin-users.component";
 import BoardAdminPlaces from "./board-admin-places.component";
 import BoardAdminExits from "./board-admin-exits.component";
 import BoardAdminSchool from "./board-admin-school.component";
+import Spinner from "../utils/spinner.component";
 
-import "../../styles/management/management.css"
+import "../../styles/management/management.css";
 
 export default class BoardAdmin extends Component {
 
@@ -15,7 +16,8 @@ export default class BoardAdmin extends Component {
     super(props);
 
     this.state = {
-      school: {}
+      school: {},
+      loading: true
     };
   }
 
@@ -28,13 +30,15 @@ export default class BoardAdmin extends Component {
           SchoolService.setCurrentSchool(response.data);
 
           this.setState({
-            school: response.data
+            school: response.data,
+            loading: false
           });
         }
       },
       () => {
         this.setState({
-          school: {}
+          school: {},
+          loading: false
         });
       }
     );
@@ -45,11 +49,15 @@ export default class BoardAdmin extends Component {
 
     return (
       <div className="boards-admin">
-        {!school.id && (
+        {this.state.loading && (
+          <Spinner/>
+        )}
+
+        {!this.state.loading && !school.id && (
           <NewSchool/>
         )}
 
-        {school.id && (
+        {!this.state.loading && school.id && (
           <>
             <div className="row-board">
               <BoardAdminUsers school={school}/>

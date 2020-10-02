@@ -119,7 +119,7 @@ export default class BoardAdminUsers extends Component {
           <img
             src={Trash}
             alt="Remove"
-            className="delete-icon"
+            className="boards-admin-icon margin-left-16"
           />
         </td>
       </tr>
