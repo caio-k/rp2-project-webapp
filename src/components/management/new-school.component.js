@@ -27,7 +27,7 @@ export default class ManagementNewSchool extends Component {
       message: "",
       schoolName: "",
       schoolPrincipal: "",
-      loading: false
+      submitting: false
     };
   }
 
@@ -50,7 +50,7 @@ export default class ManagementNewSchool extends Component {
 
     this.setState({
       message: "",
-      loading: true
+      submitting: true
     });
 
     this.form.validateAll();
@@ -69,14 +69,14 @@ export default class ManagementNewSchool extends Component {
             error.toString();
 
           this.setState({
-            loading: false,
+            submitting: false,
             message: resMessage
           });
         }
       )
     } else {
       this.setState({
-        loading: false
+        submitting: false
       });
     }
   }
@@ -109,9 +109,9 @@ export default class ManagementNewSchool extends Component {
             <div className="form-group">
               <button
                 className="new-school-submit-button btn btn-block"
-                disabled={this.state.loading}
+                disabled={this.state.submitting}
               >
-                {this.state.loading && (
+                {this.state.submitting && (
                   <span className="spinner-border spinner-border-sm"/>
                 )}
                 <span>Create School</span>
