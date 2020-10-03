@@ -85,8 +85,8 @@ export default class ManagementNewSchool extends Component {
 
     return (
       <div className="col-md-12">
-        <div className="card card-container">
-          <span className="form-title">Create New School</span>
+        <div className="new-school-form new-school-container">
+          <span className="new-school-title">Create New School</span>
           <Form
             onSubmit={this.handleSubmit}
             ref={c => {
@@ -94,7 +94,7 @@ export default class ManagementNewSchool extends Component {
             }}
           >
             <div className="form-group">
-              <label htmlFor="schoolName" className="description">School name</label>
+              <label htmlFor="schoolName" className="new-school-form-label">School name</label>
               <Input
                 type="text"
                 className="form-control"
@@ -108,7 +108,7 @@ export default class ManagementNewSchool extends Component {
 
             <div className="form-group">
               <button
-                className="submit-button btn btn-block"
+                className="new-school-submit-button btn btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
