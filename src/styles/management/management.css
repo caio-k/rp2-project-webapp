@@ -1,12 +1,40 @@
-.form-title {
-    text-align: center;
+.new-school-container.new-school-form {
+    max-width: 350px !important;
+    padding: 40px 40px;
+}
+
+.new-school-form {
+    background-color: #91ffdb;
+    padding: 20px 25px 30px;
+    margin: 50px auto 25px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.new-school-title {
+    display: flex;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
-.submit-button {
+.new-school-form-label {
+    color: #00473C;
+    margin-left: 5px;
+    font-weight: 600;
+    display: block;
+    margin-top: 1px;
+}
+
+.new-school-submit-button {
     background-color: #00BFA6;
     color: #FFF;
 }
+
+
 
 .boards-admin {
     display: flex;

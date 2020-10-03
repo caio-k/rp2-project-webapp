@@ -90,7 +90,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="col-md-12">
-        <div className="card card-container">
+        <div className="public-form-card public-form-container">
           <img
             src={profilePic}
             alt="profile-img"
@@ -104,7 +104,7 @@ export default class Login extends Component {
             }}
           >
             <div className="form-group">
-              <label htmlFor="username" className="description">Username</label>
+              <label htmlFor="username" className="public-form-label">Username</label>
               <Input
                 type="text"
                 className="form-control"
@@ -117,7 +117,7 @@ export default class Login extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password" className="description">Password</label>
+              <label htmlFor="password" className="public-form-label">Password</label>
               <Input
                 type="password"
                 className="form-control"
@@ -130,7 +130,7 @@ export default class Login extends Component {
 
             <div className="form-group">
               <button
-                className="submitButton btn btn-block"
+                className="public-form-button btn btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
