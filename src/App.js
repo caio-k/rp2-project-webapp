@@ -12,7 +12,7 @@ import Register from "./components/register.component";
 import Home from "./components/home.component";
 import BoardAdmin from "./components/management/board-admin.component";
 import BoardExit from "./components/board-exit.component";
-import BoardPlace from "./components/board-place.component";
+import BoardPlace from "./components/places/board-place.component";
 import BoardSchool from "./components/board-school.component";
 
 class App extends Component {
