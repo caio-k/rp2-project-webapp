@@ -37,17 +37,7 @@ export default class BoardAdminExits extends Component {
         });
       },
       error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        this.setState({
-          message: resMessage,
-          success: false
-        });
+        this.handleError(error);
       }
     )
   }
@@ -77,17 +67,7 @@ export default class BoardAdminExits extends Component {
           }
         },
         error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            message: resMessage,
-            success: false
-          });
+          this.handleError(error);
         }
       )
     }
@@ -107,17 +87,7 @@ export default class BoardAdminExits extends Component {
           this.setExitInformation(exitIndex, "updating", false);
         },
         error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            message: resMessage,
-            success: false
-          });
+          this.handleError(error);
           this.setExitInformation(exitIndex, "exitName", this.state.exits[exitIndex].backupName);
           this.setExitInformation(exitIndex, "updating", false);
         }
@@ -141,17 +111,7 @@ export default class BoardAdminExits extends Component {
         }
       },
       error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        this.setState({
-          message: resMessage,
-          success: false
-        });
+        this.handleError(error);
       }
     )
   }
@@ -186,6 +146,20 @@ export default class BoardAdminExits extends Component {
   findExitIndexByExitId(exitId) {
     return this.state.exits.findIndex(exit => {
       return exit.exitId === exitId
+    });
+  }
+
+  handleError(error) {
+    const resMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    this.setState({
+      message: resMessage,
+      success: false
     });
   }
 
