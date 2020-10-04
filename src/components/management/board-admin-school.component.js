@@ -65,7 +65,8 @@ export default class BoardAdminSchool extends Component {
           this.setState({
             disabledInput: true,
             message: resMessage,
-            updatedStatus: false
+            updatedStatus: false,
+            schoolName: this.state.school.name
           });
         }
       );

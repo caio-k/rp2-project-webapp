@@ -60,10 +60,10 @@ export default class BoardAdmin extends Component {
           <>
             <div className="row-board">
               <BoardAdminUsers school={school}/>
-              <BoardAdminPlaces/>
+              <BoardAdminPlaces school={school}/>
             </div>
             <div className="row-board">
-              <BoardAdminExits/>
+              <BoardAdminExits school={school}/>
               <BoardAdminSchool school={school}/>
             </div>
           </>

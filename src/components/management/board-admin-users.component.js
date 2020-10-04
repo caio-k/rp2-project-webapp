@@ -113,7 +113,7 @@ export default class BoardAdminUsers extends Component {
 
   renderRow(row) {
     return (
-      <tr key={row.userId}>
+      <tr key={row.userId} style={{lineHeight: "25px"}}>
         <td>{row.username}</td>
         <td style={{cursor: "pointer"}} onClick={() => this.handleDeleteTeacher(row.username)}>
           <img
