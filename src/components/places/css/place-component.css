@@ -11,9 +11,9 @@ button:focus{
 body{
     --cor-bg-principal: teal;
     --cor-words-principal: white;
-    --cor-crowded: #860001;
-    --cor-almost-full: #ddc700;
-    --cor-safe: #12cf01;
+    --status--crowded: #860001;
+    --status--almost-full: #ddc700;
+    --status--safe: #12cf01;
     --line-heigth-default: 50px;
 }
 
@@ -66,4 +66,26 @@ body{
     border: 2px solid var(--cor-words-principal);
     color: var(--cor-words-principal);
     font-weight: bold;
+}
+
+.status--crowded{
+    background-color: var(--status--crowded);
+}
+.status--crowded::before{
+    content: "Crowded";
+}
+
+.status--almost-full{
+    background-color: var(--status--almost-full);
+}   
+.status--almost-full::before{
+    content: "Almost Full";
+}
+
+.status--safe{
+    background-color: var(--status--safe);
+    content: "Safe";
+}
+.status--safe::before{
+    content: "Safe";
 }
