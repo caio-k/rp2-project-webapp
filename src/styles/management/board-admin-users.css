@@ -3,16 +3,24 @@
     height: 26px;
     margin-right: 2px;
 }
-
 .form-header-board button {
     border: none;
 }
-
 .form-header-board .input-username {
     width: 150px;
     height: 26px;
 }
-
 .table-overflow {
     overflow-x: auto;
+}
+.modal-buttons {
+    display: flex;
+    justify-content:center;
+    margin-top: 30px;
+}
+.modal-buttons button {
+    width: 100px;
+}
+.modal-buttons button:first-child {
+    margin-right: 20px;
 }

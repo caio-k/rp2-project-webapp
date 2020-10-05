@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import MessageAlert from "./message-alert.component";
+import Modal from "../utils/modal.component"
 import ExitService from "../../services/exit.service"
 import Trash from "../../assets/trash.svg";
 import Pencil from "../../assets/pencil.svg"
@@ -10,6 +11,7 @@ export default class BoardAdminExits extends Component {
   constructor(props) {
     super(props);
     this.onChangeNewExitName = this.onChangeNewExitName.bind(this);
+    this.setModalVisualization = this.setModalVisualization.bind(this);
     this.handleInsertExit = this.handleInsertExit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -21,6 +23,9 @@ export default class BoardAdminExits extends Component {
       newExitName: "",
       message: "",
       success: false,
+      isModalVisible: false,
+      exitIdToBeDeleted: -1,
+      exitNameToBeDeleted: ""
     };
   }
 
@@ -45,6 +50,14 @@ export default class BoardAdminExits extends Component {
   onChangeNewExitName(e) {
     this.setState({
       newExitName: e.target.value
+    });
+  }
+
+  setModalVisualization(visible, exitIdToBeDeleted, exitNameToBeDeleted) {
+    this.setState({
+      isModalVisible: visible,
+      exitIdToBeDeleted: exitIdToBeDeleted,
+      exitNameToBeDeleted: exitNameToBeDeleted
     });
   }
 
@@ -106,7 +119,8 @@ export default class BoardAdminExits extends Component {
               return obj.exitId !== exitId;
             }),
             message: response.data.message,
-            success: true
+            success: true,
+            isModalVisible: false
           });
         }
       },
@@ -159,7 +173,8 @@ export default class BoardAdminExits extends Component {
 
     this.setState({
       message: resMessage,
-      success: false
+      success: false,
+      isModalVisible: false
     });
   }
 
@@ -185,7 +200,8 @@ export default class BoardAdminExits extends Component {
             className="boards-admin-icon margin-left-16"
           />
         </td>
-        <td style={{cursor: "pointer"}} onClick={() => this.handleDelete(row.exitId)}>
+        <td style={{cursor: "pointer"}}
+            onClick={() => this.setModalVisualization(true, row.exitId, this.state.exits[exitIndex].backupName)}>
           <img
             src={Trash}
             alt="Remove"
@@ -224,6 +240,18 @@ export default class BoardAdminExits extends Component {
             </div>
           </form>
         </div>
+
+        {this.state.isModalVisible && (
+          <Modal onClose={() => this.setModalVisualization(false)}>
+            <h6 style={{paddingTop: "10px"}}>Do you really want to delete the exit "{this.state.exitNameToBeDeleted}"
+              ?</h6>
+            <div className="modal-buttons">
+              <button className="btn btn-primary" onClick={() => this.handleDelete(this.state.exitIdToBeDeleted)}>Yes
+              </button>
+              <button className="btn btn-danger" onClick={() => this.setModalVisualization(false)}>No</button>
+            </div>
+          </Modal>
+        )}
 
         {this.state.message && (
           <MessageAlert success={this.state.success} message={this.state.message}/>
