@@ -3,14 +3,17 @@ import SchoolService from "../../services/school.service"
 import UserService from "../../services/user.service"
 import Trash from "../../assets/trash.svg"
 import MessageAlert from "./message-alert.component";
+import Modal from "../utils/modal.component"
 
 import "../../styles/management/board-admin-users.css"
+import "../../styles/custom_modal.css"
 
 export default class BoardAdminUsers extends Component {
 
   constructor(props) {
     super(props);
     this.onChangeNewTeacherUsername = this.onChangeNewTeacherUsername.bind(this);
+    this.setModalVisualization = this.setModalVisualization.bind(this);
     this.handleInsertTeacher = this.handleInsertTeacher.bind(this);
     this.handleDeleteTeacher = this.handleDeleteTeacher.bind(this);
     this.renderRow = this.renderRow.bind(this);
@@ -19,7 +22,9 @@ export default class BoardAdminUsers extends Component {
       teachers: [],
       newTeacherUsername: "",
       message: "",
-      success: false
+      success: false,
+      isModalVisible: false,
+      userToBeDeleted: ""
     };
   }
 
@@ -49,6 +54,13 @@ export default class BoardAdminUsers extends Component {
   onChangeNewTeacherUsername(e) {
     this.setState({
       newTeacherUsername: e.target.value
+    });
+  }
+
+  setModalVisualization(visible, userToBeDeleted) {
+    this.setState({
+      isModalVisible: visible,
+      userToBeDeleted: userToBeDeleted
     });
   }
 
@@ -91,7 +103,8 @@ export default class BoardAdminUsers extends Component {
               return obj.username !== username;
             }),
             message: response.data.message,
-            success: true
+            success: true,
+            isModalVisible: false
           });
         }
       },
@@ -105,7 +118,8 @@ export default class BoardAdminUsers extends Component {
 
         this.setState({
           message: resMessage,
-          success: false
+          success: false,
+          isModalVisible: false
         });
       }
     );
@@ -115,7 +129,7 @@ export default class BoardAdminUsers extends Component {
     return (
       <tr key={row.userId} style={{lineHeight: "25px"}}>
         <td>{row.username}</td>
-        <td style={{cursor: "pointer"}} onClick={() => this.handleDeleteTeacher(row.username)}>
+        <td style={{cursor: "pointer"}} onClick={() => this.setModalVisualization(true, row.username)}>
           <img
             src={Trash}
             alt="Remove"
@@ -155,6 +169,19 @@ export default class BoardAdminUsers extends Component {
             </div>
           </form>
         </div>
+
+        {this.state.isModalVisible && (
+          <Modal onClose={() => this.setModalVisualization(false)}>
+            <h6 style={{paddingTop: "10px"}}>Do you really want to delete the teacher "{this.state.userToBeDeleted}"
+              ?</h6>
+            <div className="modal-buttons">
+              <button className="btn btn-primary"
+                      onClick={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}>Yes
+              </button>
+              <button className="btn btn-danger" onClick={() => this.setModalVisualization(false)}>No</button>
+            </div>
+          </Modal>
+        )}
 
         {this.state.message && (
           <MessageAlert success={this.state.success} message={this.state.message}/>
