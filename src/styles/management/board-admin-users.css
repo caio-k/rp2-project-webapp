@@ -13,6 +13,14 @@
 .table-overflow {
     overflow-x: auto;
 }
+.th-icon {
+    width: 60px;
+    text-align:center;
+}
+.td-icon {
+    cursor: pointer;
+    align-content:center;
+}
 .modal-buttons {
     display: flex;
     justify-content:center;

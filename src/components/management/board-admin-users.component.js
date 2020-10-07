@@ -7,6 +7,7 @@ import Modal from "../utils/modal.component"
 
 import "../../styles/management/board-admin-users.css"
 import "../../styles/custom_modal.css"
+import RemovalConfirmation from "./removal-confirmation.component";
 
 export default class BoardAdminUsers extends Component {
 
@@ -129,7 +130,7 @@ export default class BoardAdminUsers extends Component {
     return (
       <tr key={row.userId} style={{lineHeight: "25px"}}>
         <td>{row.username}</td>
-        <td style={{cursor: "pointer"}} onClick={() => this.setModalVisualization(true, row.username)}>
+        <td className="td-icon" onClick={() => this.setModalVisualization(true, row.username)}>
           <img
             src={Trash}
             alt="Remove"
@@ -172,14 +173,9 @@ export default class BoardAdminUsers extends Component {
 
         {this.state.isModalVisible && (
           <Modal onClose={() => this.setModalVisualization(false)}>
-            <h6 style={{paddingTop: "10px"}}>Do you really want to delete the teacher "{this.state.userToBeDeleted}"
-              ?</h6>
-            <div className="modal-buttons">
-              <button className="btn btn-primary"
-                      onClick={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}>Yes
-              </button>
-              <button className="btn btn-danger" onClick={() => this.setModalVisualization(false)}>No</button>
-            </div>
+            <RemovalConfirmation name={this.state.userToBeDeleted}
+                                 handleDelete={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}
+                                 handleClose={() => this.setModalVisualization(false)}/>
           </Modal>
         )}
 
@@ -192,7 +188,7 @@ export default class BoardAdminUsers extends Component {
             <thead>
             <tr>
               <th scope="col">Teacher</th>
-              <th scope="col" style={{width: "60px"}}>Remove</th>
+              <th scope="col" className="th-icon">Remove</th>
             </tr>
             </thead>
             <tbody>
