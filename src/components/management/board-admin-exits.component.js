@@ -179,6 +179,12 @@ export default class BoardAdminExits extends Component {
     });
   }
 
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
+  }
+
   renderRow(row) {
     const exitIndex = this.findExitIndexByExitId(row.exitId);
 
@@ -251,7 +257,7 @@ export default class BoardAdminExits extends Component {
         )}
 
         {this.state.message && (
-          <MessageAlert success={this.state.success} message={this.state.message}/>
+          <MessageAlert success={this.state.success} message={this.state.message} onClose={() => this.closeNotification()}/>
         )}
 
         <div className="table-overflow">

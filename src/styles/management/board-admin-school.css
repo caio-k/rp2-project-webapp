@@ -1,7 +1,10 @@
 .boards-admin-school-input {
     width: calc(100% - 80px);
 }
-
 .boards-admin-school-message {
     margin: 0 auto;
+}
+.icon-field:hover {
+    background-color: #00BFA6;
+    transition-duration: 0.5s;
 }

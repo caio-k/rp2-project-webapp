@@ -17,13 +17,13 @@ export default class PlaceForm extends Component {
     this.handleUpdatePlace = this.handleUpdatePlace.bind(this);
 
     this.state = {
-      placeId: this.props.placeId || -1,
-      placeName: this.props.placeName || "",
-      placeType: this.props.placeType || "WOMEN_BATHROOM",
-      maxPeople: this.props.maxPeople || 0,
-      timeLimit: this.props.timeLimit || 0,
+      placeId: this.props.placeInEvidence.placeId || -1,
+      placeName: this.props.placeInEvidence.name || "",
+      placeType: this.props.placeInEvidence.type || "WOMEN_BATHROOM",
+      maxPeople: this.props.placeInEvidence.maxPeople || 0,
+      timeLimit: this.props.placeInEvidence.limitTimeSeconds || 0,
       readOnly: this.props.readOnly || false,
-      create: !this.props.placeName,
+      create: !this.props.placeInEvidence.name,
       message: "",
       successful: false,
       submitting: false
@@ -256,7 +256,7 @@ export default class PlaceForm extends Component {
           {this.state.message && (
             <div className="form-group">
               <div className={this.state.successful ? "alert alert-success" : "alert alert-danger"}
-                   role="alert">
+                   role="alert" style={{textAlign: "center"}}>
                 {this.state.message}
               </div>
             </div>

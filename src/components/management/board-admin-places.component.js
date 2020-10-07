@@ -24,13 +24,7 @@ export default class BoardAdminPlaces extends Component {
       success: false,
       isInfoModalVisible: false,
       isDeleteModalVisible: false,
-      placeInEvidence: {
-        placeId: -1,
-        name: "",
-        type: "",
-        maxPeople: 0,
-        limitTimeSeconds: 0
-      },
+      placeInEvidence: {},
       placeInEvidenceReadOnly: false
     };
   }
@@ -41,6 +35,7 @@ export default class BoardAdminPlaces extends Component {
         this.setState({
           places: response.data
         });
+        this.sortPlaces();
       },
       error => {
         this.handleError(error);
@@ -104,6 +99,7 @@ export default class BoardAdminPlaces extends Component {
     this.setState({
       places: [...this.state.places, place]
     });
+    this.sortPlaces();
   }
 
   updatePlaceOfState(place) {
@@ -111,6 +107,7 @@ export default class BoardAdminPlaces extends Component {
     const places = [...this.state.places];
     places[placeIndex] = place
     this.setState({places});
+    this.sortPlaces();
   }
 
   findPlaceIndexByExitId(placeId) {
@@ -119,11 +116,25 @@ export default class BoardAdminPlaces extends Component {
     });
   }
 
+  sortPlaces() {
+    const places = [...this.state.places];
+    places.sort(function (a, b) {
+      return a.type < b.type ? 1 : (a.type > b.type ? -1 : (a.name > b.name ? 1 : (a.name < b.name ? -1 : 0)));
+    });
+    this.setState({places});
+  }
+
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
+  }
+
   renderRow(row) {
 
     return (
       <tr key={row.placeId}>
-        <td>{row.name}</td>
+        <td style={{wordWrap: "break-word"}}>{row.name}</td>
         <td className="td-icon"
             onClick={() => this.setInfoModalVisualization(true, row, true)}>
           <img
@@ -167,17 +178,13 @@ export default class BoardAdminPlaces extends Component {
         </div>
 
         {this.state.message && (
-          <MessageAlert success={this.state.success} message={this.state.message}/>
+          <MessageAlert success={this.state.success} message={this.state.message} onClose={() => this.closeNotification()}/>
         )}
 
         {this.state.isInfoModalVisible && (
           <Modal onClose={() => this.setInfoModalVisualization(false)}>
             <PlaceForm schoolId={this.props.school.id}
-                       placeId={this.state.placeInEvidence.placeId}
-                       placeName={this.state.placeInEvidence.name}
-                       placeType={this.state.placeInEvidence.type}
-                       maxPeople={this.state.placeInEvidence.maxPeople}
-                       timeLimit={this.state.placeInEvidence.limitTimeSeconds}
+                       placeInEvidence={this.state.placeInEvidence}
                        readOnly={this.state.placeInEvidenceReadOnly}
                        onAdd={place => this.addPlaceToState(place)}
                        onUpdate={place => this.updatePlaceOfState(place)}
@@ -194,7 +201,7 @@ export default class BoardAdminPlaces extends Component {
         )}
 
         <div className="table-overflow">
-          <table className="table table-sm table-hover fontsize-13">
+          <table style={{tableLayout: "fixed"}} className="table table-sm table-hover fontsize-13">
             <thead>
             <tr>
               <th scope="col">Place</th>

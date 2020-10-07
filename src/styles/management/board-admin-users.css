@@ -1,5 +1,5 @@
 .form-header-board {
-    width: 188px;
+    width: 190px;
     height: 26px;
     margin-right: 2px;
 }
@@ -9,6 +9,7 @@
 .form-header-board .input-username {
     width: 150px;
     height: 26px;
+    margin-right: 2px;
 }
 .table-overflow {
     overflow-x: auto;
@@ -20,6 +21,10 @@
 .td-icon {
     cursor: pointer;
     align-content:center;
+}
+.td-icon:hover {
+    background-color: #00BFA6;
+    transition-duration: 0.5s;
 }
 .modal-buttons {
     display: flex;

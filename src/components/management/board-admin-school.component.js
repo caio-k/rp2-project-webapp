@@ -37,40 +37,55 @@ export default class BoardAdminSchool extends Component {
         disabledInput: false
       });
     } else {
-      SchoolService.updateSchool(this.state.school.id, this.state.schoolName).then(
-        response => {
-          this.setState({
-            disabledInput: true,
-            message: response.data.message,
-            updatedStatus: true,
-          });
+      if (this.state.schoolName) {
+        SchoolService.updateSchool(this.state.school.id, this.state.schoolName).then(
+          response => {
+            this.setState({
+              disabledInput: true,
+              message: response.data.message,
+              updatedStatus: true,
+            });
 
-          this.setState(prevState => ({
-            school: {
-              ...prevState.school,
-              name: this.state.schoolName
-            }
-          }));
+            this.setState(prevState => ({
+              school: {
+                ...prevState.school,
+                name: this.state.schoolName
+              }
+            }));
 
-          SchoolService.setCurrentSchool(this.state.school);
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+            SchoolService.setCurrentSchool(this.state.school);
+          },
+          error => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
 
-          this.setState({
-            disabledInput: true,
-            message: resMessage,
-            updatedStatus: false,
-            schoolName: this.state.school.name
-          });
-        }
-      );
+            this.setState({
+              disabledInput: true,
+              message: resMessage,
+              updatedStatus: false,
+              schoolName: this.state.school.name
+            });
+          }
+        );
+      } else {
+        this.setState({
+          disabledInput: true,
+          message: "Oops, school name can't be empty",
+          updatedStatus: false,
+          schoolName: this.state.school.name
+        });
+      }
     }
+  }
+
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
   }
 
   render() {
@@ -82,7 +97,8 @@ export default class BoardAdminSchool extends Component {
         </div>
 
         {this.state.message && (
-          <MessageAlert success={this.state.updatedStatus} message={this.state.message}/>
+          <MessageAlert success={this.state.updatedStatus} message={this.state.message}
+                        onClose={() => this.closeNotification()}/>
         )}
 
         <form className="form-inline">
@@ -95,7 +111,7 @@ export default class BoardAdminSchool extends Component {
               autoComplete="off"
               onChange={this.onChangeSchoolName}/>
           </div>
-          <button className="btn m-2" onClick={this.handleUpdate}>
+          <button className="icon-field btn m-2" onClick={this.handleUpdate}>
             <img
               src={this.state.disabledInput ? Pencil : Check}
               alt="update"
