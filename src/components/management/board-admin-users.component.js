@@ -7,6 +7,7 @@ import Modal from "../utils/modal.component"
 
 import "../../styles/management/board-admin-users.css"
 import "../../styles/custom_modal.css"
+import RemovalConfirmation from "./removal-confirmation.component";
 
 export default class BoardAdminUsers extends Component {
 
@@ -67,31 +68,33 @@ export default class BoardAdminUsers extends Component {
   handleInsertTeacher(e) {
     e.preventDefault();
 
-    UserService.addSchool(this.props.school.id, this.state.newTeacherUsername).then(
-      response => {
-        if (response.data) {
+    if (this.validateNewUsername()) {
+      UserService.addSchool(this.props.school.id, this.state.newTeacherUsername).then(
+        response => {
+          if (response.data) {
+            this.setState({
+              teachers: [...this.state.teachers, response.data],
+              newTeacherUsername: "",
+              message: "User " + response.data.username + " added successfully!",
+              success: true
+            });
+          }
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
           this.setState({
-            teachers: [...this.state.teachers, response.data],
-            newTeacherUsername: "",
-            message: "User " + response.data.username + " added successfully!",
-            success: true
+            message: resMessage,
+            success: false
           });
         }
-      },
-      error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        this.setState({
-          message: resMessage,
-          success: false
-        });
-      }
-    );
+      );
+    }
   }
 
   handleDeleteTeacher(username) {
@@ -125,11 +128,39 @@ export default class BoardAdminUsers extends Component {
     );
   }
 
+  validateNewUsername() {
+
+    const newTeacher = this.state.newTeacherUsername;
+    if (!newTeacher) {
+      this.setMessage("Oops, username can't be empty.", false);
+      return false;
+    } else if (this.state.teachers.filter(function (user) {
+      return user.username === newTeacher
+    }).length > 0) {
+      this.setMessage("Oops, teacher already exists at the school.", false);
+      return false
+    }
+    return true;
+  }
+
+  setMessage(message, success) {
+    this.setState({
+      message: message,
+      success: success
+    });
+  }
+
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
+  }
+
   renderRow(row) {
     return (
       <tr key={row.userId} style={{lineHeight: "25px"}}>
-        <td>{row.username}</td>
-        <td style={{cursor: "pointer"}} onClick={() => this.setModalVisualization(true, row.username)}>
+        <td style={{wordWrap: "break-word"}}>{row.username}</td>
+        <td className="td-icon" onClick={() => this.setModalVisualization(true, row.username)}>
           <img
             src={Trash}
             alt="Remove"
@@ -172,27 +203,22 @@ export default class BoardAdminUsers extends Component {
 
         {this.state.isModalVisible && (
           <Modal onClose={() => this.setModalVisualization(false)}>
-            <h6 style={{paddingTop: "10px"}}>Do you really want to delete the teacher "{this.state.userToBeDeleted}"
-              ?</h6>
-            <div className="modal-buttons">
-              <button className="btn btn-primary"
-                      onClick={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}>Yes
-              </button>
-              <button className="btn btn-danger" onClick={() => this.setModalVisualization(false)}>No</button>
-            </div>
+            <RemovalConfirmation name={this.state.userToBeDeleted}
+                                 handleDelete={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}
+                                 handleClose={() => this.setModalVisualization(false)}/>
           </Modal>
         )}
 
         {this.state.message && (
-          <MessageAlert success={this.state.success} message={this.state.message}/>
+          <MessageAlert success={this.state.success} message={this.state.message} onClose={() => this.closeNotification()}/>
         )}
 
         <div className="table-overflow">
-          <table className="table table-sm table-hover fontsize-13">
+          <table style={{tableLayout: "fixed"}} className="table table-sm table-hover fontsize-13">
             <thead>
             <tr>
               <th scope="col">Teacher</th>
-              <th scope="col" style={{width: "60px"}}>Remove</th>
+              <th scope="col" className="th-icon">Remove</th>
             </tr>
             </thead>
             <tbody>

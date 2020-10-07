@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import MessageAlert from "./message-alert.component";
 import Modal from "../utils/modal.component"
+import RemovalConfirmation from "./removal-confirmation.component";
 import ExitService from "../../services/exit.service"
 import Trash from "../../assets/trash.svg";
 import Pencil from "../../assets/pencil.svg"
@@ -178,6 +179,12 @@ export default class BoardAdminExits extends Component {
     });
   }
 
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
+  }
+
   renderRow(row) {
     const exitIndex = this.findExitIndexByExitId(row.exitId);
 
@@ -193,14 +200,14 @@ export default class BoardAdminExits extends Component {
             autoComplete="off"
             onChange={(e) => this.setExitInformation(exitIndex, "exitName", e.target.value)}/>
         </td>
-        <td style={{cursor: "pointer"}} onClick={() => this.handleUpdate(row.exitId)}>
+        <td className="td-icon" onClick={() => this.handleUpdate(row.exitId)}>
           <img
             src={row.updating ? Check : Pencil}
             alt="Update"
             className="boards-admin-icon margin-left-16"
           />
         </td>
-        <td style={{cursor: "pointer"}}
+        <td className="td-icon"
             onClick={() => this.setModalVisualization(true, row.exitId, this.state.exits[exitIndex].backupName)}>
           <img
             src={Trash}
@@ -243,18 +250,14 @@ export default class BoardAdminExits extends Component {
 
         {this.state.isModalVisible && (
           <Modal onClose={() => this.setModalVisualization(false)}>
-            <h6 style={{paddingTop: "10px"}}>Do you really want to delete the exit "{this.state.exitNameToBeDeleted}"
-              ?</h6>
-            <div className="modal-buttons">
-              <button className="btn btn-primary" onClick={() => this.handleDelete(this.state.exitIdToBeDeleted)}>Yes
-              </button>
-              <button className="btn btn-danger" onClick={() => this.setModalVisualization(false)}>No</button>
-            </div>
+            <RemovalConfirmation name={this.state.exitNameToBeDeleted}
+                                 handleDelete={() => this.handleDelete(this.state.exitIdToBeDeleted)}
+                                 handleClose={() => this.setModalVisualization(false)}/>
           </Modal>
         )}
 
         {this.state.message && (
-          <MessageAlert success={this.state.success} message={this.state.message}/>
+          <MessageAlert success={this.state.success} message={this.state.message} onClose={() => this.closeNotification()}/>
         )}
 
         <div className="table-overflow">
@@ -262,8 +265,8 @@ export default class BoardAdminExits extends Component {
             <thead>
             <tr>
               <th scope="col">Exit</th>
-              <th scope="col" style={{width: "60px"}}>Update</th>
-              <th scope="col" style={{width: "60px"}}>Remove</th>
+              <th scope="col" className="th-icon">Update</th>
+              <th scope="col" className="th-icon">Remove</th>
             </tr>
             </thead>
             <tbody>
