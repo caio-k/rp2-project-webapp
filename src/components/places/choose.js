@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import './css/choose.css'
+import girlImg from '../../assets/girl.svg'
 
 export default class ChoosePlace extends Component {
   constructor(props) {
@@ -18,7 +20,12 @@ export default class ChoosePlace extends Component {
   render() {
     return (
       <div className="container">
-        <button onClick={()=>{this.props.type('WOMEN_BATHROOM')}}>WOMEN_BATHROOM</button>
+        <div className="choose__group">
+          <h1 className="choose__title">Women Bathroom</h1>
+          <button className="choose__btn" onClick={()=>{this.props.type('WOMEN_BATHROOM')}}>  
+            <img src={girlImg} alt='Ladies Room' className="choose__img" /> 
+          </button>
+        </div>
       </div>
     );
   }

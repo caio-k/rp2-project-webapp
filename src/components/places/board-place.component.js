@@ -7,7 +7,6 @@ export default class BoardPlace extends Component {
     super(props);
 
     this.state = {
-      //type: "WOMEN_BATHROOM"
       type: ''
     };
   }
