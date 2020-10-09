@@ -15,11 +15,13 @@ body{
     --status--almost-full: #ddc700;
     --status--safe: #12cf01;
     --line-heigth-default: 50px;
+    --line-heigth-content: 130px;
 }
 
 .place__container{
     width: 300px;
     border: 1px solid var(--cor-words-principal);
+    margin: 10px;
 }
 
 .place__header{
@@ -35,7 +37,7 @@ body{
 }
 
 .place__status{
-    height: var(--line-heigth-default);
+    height: var(--line-heigth-content);
     display: flex;
     justify-content: center;
     align-items: center;

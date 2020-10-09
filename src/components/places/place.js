@@ -65,7 +65,7 @@ export default class PlaceComponent extends Component {
         <header className="place__header">
           <h3>{this.props.name} - {this.props.id}</h3>
         </header>
-        <img src={this.props.img} className="place__img" alt={this.props.type} />
+        {/* <img src={this.props.img} className="place__img" alt={this.props.type} /> */}
         <p className="place__status status--safe" id={this.props.id}> </p>
         <div className="place__manager">
           <button onClick={(e) => this.decrement(e)}>-</button>
