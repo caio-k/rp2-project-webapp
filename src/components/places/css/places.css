@@ -1,5 +1,6 @@
 .places_cards{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-wrap: wrap;
 }

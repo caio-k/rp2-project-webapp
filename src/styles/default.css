@@ -1,0 +1,26 @@
+/*RESET*/
+p{
+    margin: 0;
+}
+
+button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+/*VARIABLES*/
+body{
+    --cor-bg-principal: teal;
+    --cor-words-principal: white;
+    --cor-words-2: #367a68;
+    --status--crowded: #860001;
+    --status--almost-full: #ddc700;
+    --status--safe: #12cf01;
+    --line-heigth-default: 50px;
+    --line-heigth-content: 130px;
+    --cor-bg-header-1:#00bfa6;
+    --cor-bg-content-1: #ecf0f1;
+    --cor-bg-header-2:#3993b3;
+    --cor-bg-content-2: #b1e4e8;
+    --radius-default: 10%;
+}

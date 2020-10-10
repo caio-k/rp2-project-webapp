@@ -1,10 +1,17 @@
+.choose__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .choose__group{
-    color: white;
+    color: var(--cor-words-principal);
     width: 200px;
     height: 200px;
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
-    background: black;
+    border-top-left-radius: var(--radius-default);
+    border-top-right-radius: var(--radius-default);
+    background: var(--cor-bg-header-1);  
+    margin: 10px;  
 }
 
 .choose__title{
@@ -19,18 +26,19 @@
 .choose__btn{
     width: 200px;
     height: 200px;
-    color: white;
+    color: var(--cor-words-principal);
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-right-radius: 10%;
-    border-bottom-left-radius: 10%;
-    background-color: teal;
+    border-bottom-right-radius: var(--radius-default);
+    border-bottom-left-radius: var(--radius-default);
+    background-color: var(--cor-bg-content-1);
     border: none;
     padding: 10px;
 }
 
 .choose__img{
-    width: 70px;
+    /* width: 70px; */
+    max-width: 80%;
 }
