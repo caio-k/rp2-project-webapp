@@ -2,10 +2,13 @@
     width: 300px;
     border: 1px solid var(--cor-words-principal);
     margin: 10px;
+    border-radius: var(--radius-default);
+    overflow: hidden;
+    background-color: var(--cor-bg-content-1);
 }
 
 .place__header{
-    background-color: var(--cor-bg-principal);
+    background: var(--cor-bg-header-1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +17,33 @@
 
 .place__img{
     max-width: 100%;
+}
+.place__counter{
+    display: flex;
+    justify-content: space-around;
+    height: 0px;
+    position: relative;
+    top: 40px;
+    color: var(--cor-words-principal);
+}
+
+.place__counter p {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.place__counter p span{
+    border-radius: 100%;
+    width: 50px;
+    min-height: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: inherit;
+    background-color: var(--cor-bg-content-1);
+    color: black;
 }
 
 .place__status{
@@ -24,10 +54,14 @@
     color: var(--cor-words-principal);
     background-color: var(--cor-crowded);
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 30px;
 }
 
 .place__manager{
-    background-color: var(--cor-bg-principal);
+    background: var(--cor-bg-header-1);
     display: flex;
     justify-content: center;
     align-items: center;

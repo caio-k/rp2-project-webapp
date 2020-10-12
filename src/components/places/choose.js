@@ -28,13 +28,13 @@ export default class ChoosePlace extends Component {
         <div className="choose__group">
           <h1 className="choose__title">Men's Bathroom</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('WOMEN_BATHROOM')}}>  
-            <img src={menImg} alt='Ladies Room' className="choose__img" /> 
+            <img src={menImg} alt='Ladies Room' className="choose__img" style={{width: '70px'}} /> 
           </button>
         </div>
         <div className="choose__group">
           <h1 className="choose__title">Ladies Bathroom</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('WOMEN_BATHROOM')}}>  
-            <img src={girlImg} alt='Ladies Room' className="choose__img" /> 
+            <img src={girlImg} alt='Ladies Room' className="choose__img" style={{width: '70px'}} /> 
           </button>
         </div>
         <div className="choose__group">

@@ -67,12 +67,15 @@ export default class PlaceComponent extends Component {
           <h3>{this.props.name} - {this.props.id}</h3>
         </header>
         {/* <img src={this.props.img} className="place__img" alt={this.props.type} /> */}
+        <div className="place__counter">
+          <p>Actual <span>{this.state.counter}</span></p>
+          <p>Max <span>{this.props.max}</span></p>
+        </div>
         <p className="place__status status--safe" id={this.props.id}> </p>
         <div className="place__manager">
           <button onClick={(e) => this.decrement(e)}>-</button>
           <p>{this.state.counter}</p>
           <button onClick={(e) => this.increment(e)}>+</button>
-          <p>Max: {this.props.max}</p>
         </div>
       </div>
     );
