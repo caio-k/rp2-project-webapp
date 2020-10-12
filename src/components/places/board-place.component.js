@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import ChoosePlace from './choose';
 import Places from './places';
+import './css/board-place.css'
 
 export default class BoardPlace extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      type: ''
+      type: ''      
     };
   }
 
@@ -19,7 +20,7 @@ export default class BoardPlace extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="board__place__container">   
 
         {this.state.type === ''?
           <ChoosePlace type={(type)=>{

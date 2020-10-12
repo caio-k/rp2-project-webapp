@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PlaceComponent from './place';
 import PlaceService from '../../services/place.service';
+import Spinner from "../utils/spinner.component";
 import './css/places.css'
 
 export default class Places extends Component {
@@ -8,7 +9,8 @@ export default class Places extends Component {
     super(props);
 
     this.state = {
-      renderPlaces: []
+      renderPlaces: [],
+      loading: true
     };
   }
 
@@ -23,11 +25,13 @@ export default class Places extends Component {
     PlaceService.listAllPlacesBySchoolId(school.id).then(res =>{
 
       const placesToRender = res.data.filter((item)=>{
+        console.log(item.type)
         return item.type === this.props.type
       })
 
       this.setState({
-        renderPlaces: placesToRender
+        renderPlaces: placesToRender,
+        loading: false
       });
     })
   }
@@ -35,6 +39,13 @@ export default class Places extends Component {
   render() {
     return (
       <div className="container">
+
+        {this.state.loading && (
+          <Spinner/>
+        )}
+
+        {!this.state.loading && (
+
           <div className="places_cards"> 
             {this.state.renderPlaces.map((item)=>(
               <PlaceComponent
@@ -69,7 +80,8 @@ export default class Places extends Component {
               limit_time="5"
               type="bathroom"
             />
-          </div>
+          </div>     
+        )}
       </div>
     );
   }

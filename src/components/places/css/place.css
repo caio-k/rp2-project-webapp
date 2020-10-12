@@ -7,12 +7,15 @@
     background-color: var(--cor-bg-content-1);
 }
 
-.place__header{
+.place__header, .place__header h3 {
     background: var(--cor-bg-header-1);
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--cor-words-principal);
+    min-height: 40px;
+    max-height: 40px;
+    font-size: 1.3rem;
 }
 
 .place__img{
