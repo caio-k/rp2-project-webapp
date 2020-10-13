@@ -108,3 +108,8 @@
 .status--safe::before{
     content: "Safe";
 }
+
+.place_alert{
+    position: absolute;
+    top: 90px;
+}

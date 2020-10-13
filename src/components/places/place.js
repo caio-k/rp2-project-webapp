@@ -7,7 +7,8 @@ export default class PlaceComponent extends Component {
     super(props);
 
     this.state = {
-      counter: 0
+      counter: 0,
+      alertStatus: false
     };
   }
 
@@ -20,11 +21,15 @@ export default class PlaceComponent extends Component {
     e.preventDefault();
     (this.state.counter >= 0 && this.state.counter < this.props.max) ?
 
-    this.setState((state) =>{
+    this.setState(() =>{
       return {counter: this.state.counter + 1}
     })
     :
-    alert("valor não permitido")
+    alert("Valor não permitido")
+
+    // this.setState({
+    //   alertStatus: true
+    // })
 
     this.placeStatus(this.state.counter + 1)
   }
@@ -33,11 +38,15 @@ export default class PlaceComponent extends Component {
     e.preventDefault();
     (this.state.counter > 0 && this.state.counter <= this.props.max) ?
 
-    this.setState((state) =>{
+    this.setState(() =>{
       return {counter: this.state.counter - 1}
     })
-    :
-    alert("valor não permitido")
+    : 
+    alert("Valor não permitido")
+
+    // this.setState({
+    //   alertStatus: true
+    // })
     
     this.placeStatus(this.state.counter - 1)
   }
@@ -63,15 +72,21 @@ export default class PlaceComponent extends Component {
   render() {
     return (
       <div className="place__container">
+
+        {/* {this.alertStatus && (
+          <div className="alert alert-danger place_alert" role="alert">
+            Number not permited in "{this.props.name}-{this.props.id}"
+          </div>
+        )}  */}
+
         <header className="place__header">
           <h3>{this.props.name} - {this.props.id}</h3>
         </header>
-        {/* <img src={this.props.img} className="place__img" alt={this.props.type} /> */}
         <div className="place__counter">
           <p>Actual <span>{this.state.counter}</span></p>
           <p>Max <span>{this.props.max}</span></p>
         </div>
-        <p className="place__status status--safe" id={this.props.id}> </p>
+        <p className="place__status status--safe" id={this.props.id}></p>
         <div className="place__manager">
           <button onClick={(e) => this.decrement(e)}>-</button>
           <p>{this.state.counter}</p>
