@@ -59,20 +59,33 @@ export default class Places extends Component {
         )}
 
         {!(this.state.loading1 || this.state.loading2) && (
-          <div className="places_cards">
-            {this.state.renderPlaces.map((item) => (
-              <PlaceComponent
-                key={item.placeId}
-                id={item.placeId}
-                name={item.name}
-                type={item.type}
-                max={item.maxPeople}
-                limit_time={item.limitTimeSeconds}
-                school={this.props.school}
-                uses={this.getAllUsesByPlaceId(item.placeId)}
-              />
-            ))}
-          </div>
+          <>
+            {this.state.renderPlaces.length > 0 && (
+              <div className="places_cards">
+                {this.state.renderPlaces.map((item) => (
+                  <PlaceComponent
+                    key={item.placeId}
+                    id={item.placeId}
+                    name={item.name}
+                    type={item.type}
+                    max={item.maxPeople}
+                    limit_time={item.limitTimeSeconds}
+                    school={this.props.school}
+                    uses={this.getAllUsesByPlaceId(item.placeId)}
+                  />
+                ))}
+              </div>
+            )}
+
+            {this.state.renderPlaces.length === 0 && (
+              <div className="board">
+                <div className="board-header">
+                  <span>Places</span>
+                </div>
+                <span className="message">There are no places registered for this category yet.</span>
+              </div>
+            )}
+          </>
         )}
       </div>
     );

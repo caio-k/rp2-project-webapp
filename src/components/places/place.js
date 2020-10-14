@@ -1,99 +1,100 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import './css/place.css'
 import '../../styles/default.css'
+import AuthService from "../../services/auth.service";
 
 export default class PlaceComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      counter: 0,
-      alertStatus: false
+      ownCounter: 0,
+      actualCounter: 0
     };
   }
 
   componentDidMount() {
-    const counter = this.props.uses.reduce((accumulator, currentValue) => {
+    const user = AuthService.getCurrentUser();
+
+    const ownUse = this.props.uses.find(item => {
+      return item.userId === user.id
+    });
+
+    const ownCounter = ownUse === undefined ? 0 : ownUse.counter;
+
+    const actualCounter = this.props.uses.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.counter
     }, 0);
 
     this.setState({
-      counter: counter
+      ownCounter: ownCounter,
+      actualCounter: actualCounter
     });
   }
 
-  increment(e){
+  increment(e) {
     e.preventDefault();
-    (this.state.counter >= 0 && this.state.counter < this.props.max) ?
+    (this.state.actualCounter >= 0 && this.state.actualCounter < this.props.max) ?
 
-    this.setState(() =>{
-      return {counter: this.state.counter + 1}
-    })
-    :
-    alert("Valor não permitido")
+      this.setState(() => {
+        return {actualCounter: this.state.actualCounter + 1}
+      })
+      :
+      alert("Valor não permitido")
 
-    // this.setState({
-    //   alertStatus: true
-    // })
-
-    this.placeStatus(this.state.counter + 1)
+    this.placeStatus(this.state.actualCounter + 1)
   }
 
-  decrement(e){
+  decrement(e) {
     e.preventDefault();
-    (this.state.counter > 0 && this.state.counter <= this.props.max) ?
+    (this.state.actualCounter > 0 && this.state.actualCounter <= this.props.max) ?
 
-    this.setState(() =>{
-      return {counter: this.state.counter - 1}
-    })
-    : 
-    alert("Valor não permitido")
+      this.setState(() => {
+        return {actualCounter: this.state.actualCounter - 1}
+      })
+      :
+      alert("Valor não permitido")
 
-    // this.setState({
-    //   alertStatus: true
-    // })
-    
-    this.placeStatus(this.state.counter - 1)
+    this.placeStatus(this.state.actualCounter - 1)
   }
 
-  placeStatus(valor){
-    let elemento = document.getElementById(this.props.id);
-    if( valor >= this.props.max){
-      elemento.classList.add("status--crowded")
-      elemento.classList.remove("status--almost-full")
-      elemento.classList.remove("status--safe")
-    }else if( valor >= this.props.max - 2){
-      elemento.classList.add("status--almost-full")
-      elemento.classList.remove("status--crowded")
-      elemento.classList.remove("status--safe")
-    }else{
-      elemento.classList.add("status--safe")
-      elemento.classList.remove("status--crowded")
-      elemento.classList.remove("status--almost-full")
+  placeStatus(counter) {
+    let element = document.getElementById(this.props.id);
+    element.classList.remove("status--crowded")
+    element.classList.remove("status--almost-full")
+    element.classList.remove("status--safe")
+
+    if (counter >= this.props.max) {
+      element.classList.add("status--crowded")
+    } else if (counter >= this.props.max / 2) {
+      element.classList.add("status--almost-full")
+    } else {
+      element.classList.add("status--safe")
     }
   }
 
   render() {
     return (
       <div className="place__container">
-
-        {/* {this.alertStatus && (
-          <div className="alert alert-danger place_alert" role="alert">
-            Number not permited in "{this.props.name}-{this.props.id}"
-          </div>
-        )}  */}
-
         <header className="place__header">
           <h3>{this.props.name}</h3>
         </header>
         <div className="place__counter">
-          <p>Actual <span>{this.state.counter}</span></p>
+          <p>Own <span>{this.state.ownCounter}</span></p>
+          <p>Actual <span>{this.state.actualCounter}</span></p>
           <p>Max <span>{this.props.max}</span></p>
         </div>
-        <p className="place__status status--safe" id={this.props.id}/>
+        <p id={this.props.id}
+           className={
+             this.state.actualCounter >= this.props.max ?
+               "place__status status--crowded" :
+               this.state.actualCounter >= this.props.max / 2 ?
+                 "place__status status--almost-full" :
+                 "place__status status--safe"
+           }/>
         <div className="place__manager">
           <button onClick={(e) => this.decrement(e)}>-</button>
-          <p>{this.state.counter}</p>
+          <p>{this.state.actualCounter}</p>
           <button onClick={(e) => this.increment(e)}>+</button>
         </div>
       </div>
