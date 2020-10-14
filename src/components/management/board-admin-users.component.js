@@ -3,14 +3,18 @@ import SchoolService from "../../services/school.service"
 import UserService from "../../services/user.service"
 import Trash from "../../assets/trash.svg"
 import MessageAlert from "./message-alert.component";
+import Modal from "../utils/modal.component"
 
 import "../../styles/management/board-admin-users.css"
+import "../../styles/custom_modal.css"
+import RemovalConfirmation from "./removal-confirmation.component";
 
 export default class BoardAdminUsers extends Component {
 
   constructor(props) {
     super(props);
     this.onChangeNewTeacherUsername = this.onChangeNewTeacherUsername.bind(this);
+    this.setModalVisualization = this.setModalVisualization.bind(this);
     this.handleInsertTeacher = this.handleInsertTeacher.bind(this);
     this.handleDeleteTeacher = this.handleDeleteTeacher.bind(this);
     this.renderRow = this.renderRow.bind(this);
@@ -19,7 +23,9 @@ export default class BoardAdminUsers extends Component {
       teachers: [],
       newTeacherUsername: "",
       message: "",
-      success: false
+      success: false,
+      isModalVisible: false,
+      userToBeDeleted: ""
     };
   }
 
@@ -52,34 +58,43 @@ export default class BoardAdminUsers extends Component {
     });
   }
 
+  setModalVisualization(visible, userToBeDeleted) {
+    this.setState({
+      isModalVisible: visible,
+      userToBeDeleted: userToBeDeleted
+    });
+  }
+
   handleInsertTeacher(e) {
     e.preventDefault();
 
-    UserService.addSchool(this.props.school.id, this.state.newTeacherUsername).then(
-      response => {
-        if (response.data) {
+    if (this.validateNewUsername()) {
+      UserService.addSchool(this.props.school.id, this.state.newTeacherUsername).then(
+        response => {
+          if (response.data) {
+            this.setState({
+              teachers: [...this.state.teachers, response.data],
+              newTeacherUsername: "",
+              message: "User " + response.data.username + " added successfully!",
+              success: true
+            });
+          }
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
           this.setState({
-            teachers: [...this.state.teachers, response.data],
-            newTeacherUsername: "",
-            message: "User " + response.data.username + " added successfully!",
-            success: true
+            message: resMessage,
+            success: false
           });
         }
-      },
-      error => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        this.setState({
-          message: resMessage,
-          success: false
-        });
-      }
-    );
+      );
+    }
   }
 
   handleDeleteTeacher(username) {
@@ -91,7 +106,8 @@ export default class BoardAdminUsers extends Component {
               return obj.username !== username;
             }),
             message: response.data.message,
-            success: true
+            success: true,
+            isModalVisible: false
           });
         }
       },
@@ -105,17 +121,46 @@ export default class BoardAdminUsers extends Component {
 
         this.setState({
           message: resMessage,
-          success: false
+          success: false,
+          isModalVisible: false
         });
       }
     );
   }
 
+  validateNewUsername() {
+
+    const newTeacher = this.state.newTeacherUsername;
+    if (!newTeacher) {
+      this.setMessage("Oops, username can't be empty.", false);
+      return false;
+    } else if (this.state.teachers.filter(function (user) {
+      return user.username === newTeacher
+    }).length > 0) {
+      this.setMessage("Oops, teacher already exists at the school.", false);
+      return false
+    }
+    return true;
+  }
+
+  setMessage(message, success) {
+    this.setState({
+      message: message,
+      success: success
+    });
+  }
+
+  closeNotification() {
+    this.setState({
+      message: ""
+    });
+  }
+
   renderRow(row) {
     return (
-      <tr key={row.userId}>
-        <td>{row.username}</td>
-        <td style={{cursor: "pointer"}} onClick={() => this.handleDeleteTeacher(row.username)}>
+      <tr key={row.userId} style={{lineHeight: "25px"}}>
+        <td style={{wordWrap: "break-word"}}>{row.username}</td>
+        <td className="td-icon" onClick={() => this.setModalVisualization(true, row.username)}>
           <img
             src={Trash}
             alt="Remove"
@@ -156,16 +201,24 @@ export default class BoardAdminUsers extends Component {
           </form>
         </div>
 
+        {this.state.isModalVisible && (
+          <Modal onClose={() => this.setModalVisualization(false)}>
+            <RemovalConfirmation name={this.state.userToBeDeleted}
+                                 handleDelete={() => this.handleDeleteTeacher(this.state.userToBeDeleted)}
+                                 handleClose={() => this.setModalVisualization(false)}/>
+          </Modal>
+        )}
+
         {this.state.message && (
-          <MessageAlert success={this.state.success} message={this.state.message}/>
+          <MessageAlert success={this.state.success} message={this.state.message} onClose={() => this.closeNotification()}/>
         )}
 
         <div className="table-overflow">
-          <table className="table table-sm table-hover fontsize-13">
+          <table style={{tableLayout: "fixed"}} className="table table-sm table-hover fontsize-13">
             <thead>
             <tr>
               <th scope="col">Teacher</th>
-              <th scope="col" style={{width: "60px"}}>Remove</th>
+              <th scope="col" className="th-icon">Remove</th>
             </tr>
             </thead>
             <tbody>

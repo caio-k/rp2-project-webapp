@@ -138,7 +138,7 @@ export default class Register extends Component {
   render() {
     return (
       <div className="col-md-12">
-        <div className="card card-container">
+        <div className="public-form-card public-form-container">
           <img
             src={profilePic}
             alt="profile-img"
@@ -154,7 +154,7 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="username" className="description">Username</label>
+                  <label htmlFor="username" className="public-form-label">Username</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -167,7 +167,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email" className="description">Email</label>
+                  <label htmlFor="email" className="public-form-label">Email</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -180,7 +180,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <p className="pb-0 col-form-label description">Role</p>
+                  <p className="pb-0 col-form-label public-form-label">Role</p>
                   <div className="mr-54 form-check-inline">
                     <label className="form-check-label">
                       <input type="radio"
@@ -202,7 +202,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password" className="description">Password</label>
+                  <label htmlFor="password" className="public-form-label">Password</label>
                   <Input
                     type="password"
                     className="form-control"
@@ -214,7 +214,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="submitButton btn btn-block">Sign Up</button>
+                  <button className="public-form-button btn btn-block">Sign Up</button>
                 </div>
               </div>
             )}

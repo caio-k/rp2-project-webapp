@@ -33,6 +33,23 @@ class ExitService {
       }
     });
   }
+
+  addExitLog(username, exitId) {
+    return serverApi.post(PATH_API + 'addExitLog', null, {
+      params: {
+        username: username,
+        exitId: exitId
+      }
+    });
+  }
+
+  allValidTimestampsByExitId(exitId) {
+    return serverApi.get(PATH_API + 'allValidTimestampsByExitId', {
+      params: {
+        exitId: exitId
+      }
+    });
+  }
 }
 
 export default new ExitService();

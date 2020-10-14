@@ -37,7 +37,6 @@ export default class BoardAdmin extends Component {
       },
       () => {
         this.setState({
-          school: {},
           loading: false
         });
       }
@@ -45,26 +44,26 @@ export default class BoardAdmin extends Component {
   }
 
   render() {
-    const {school} = this.state;
+    const {school, loading} = this.state;
 
     return (
       <div className="boards-admin">
-        {this.state.loading && (
+        {loading && (
           <Spinner/>
         )}
 
-        {!this.state.loading && !school.id && (
+        {(!loading && school.id === undefined) && (
           <NewSchool/>
         )}
 
-        {!this.state.loading && school.id && (
+        {(!loading && school.id !== undefined) && (
           <>
             <div className="row-board">
               <BoardAdminUsers school={school}/>
-              <BoardAdminPlaces/>
+              <BoardAdminPlaces school={school}/>
             </div>
             <div className="row-board">
-              <BoardAdminExits/>
+              <BoardAdminExits school={school}/>
               <BoardAdminSchool school={school}/>
             </div>
           </>
