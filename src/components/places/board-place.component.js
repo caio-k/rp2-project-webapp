@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+import SchoolService from '../../services/school.service'
 import ChoosePlace from './choose';
 import Places from './places';
 import './css/board-place.css'
@@ -8,31 +9,43 @@ export default class BoardPlace extends Component {
     super(props);
 
     this.state = {
-      type: ''      
+      type: '',
+      school: null
     };
   }
 
   componentDidMount() {
+    const currentSchool = SchoolService.getCurrentSchool();
+
     this.setState({
-      content: "Place Board."
+      school: currentSchool
     });
   }
 
   render() {
     return (
-      <div className="board__place__container">   
-
-        {this.state.type === ''?
-          <ChoosePlace type={(type)=>{
-            this.setState({
-              type: type
-            })
-          }}/>
+      <>
+        {this.state.school === null ?
+          <div className="board">
+            <div className="board-header">
+              <span>Places</span>
+            </div>
+            <span className="message">You have not yet selected a school. Go to the "Schools" menu and select a school.</span>
+          </div>
           :
-          <Places type={this.state.type}/>  
+          <div className="board__place__container">
+            {this.state.type === '' ?
+              <ChoosePlace type={(type) => {
+                this.setState({
+                  type: type
+                })
+              }}/>
+              :
+              <Places type={this.state.type} school={this.state.school}/>
+            }
+          </div>
         }
-          
-      </div>
+      </>
     );
   }
 }

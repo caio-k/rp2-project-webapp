@@ -13,7 +13,12 @@ export default class PlaceComponent extends Component {
   }
 
   componentDidMount() {
+    const counter = this.props.uses.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.counter
+    }, 0);
+
     this.setState({
+      counter: counter
     });
   }
 
@@ -57,7 +62,6 @@ export default class PlaceComponent extends Component {
       elemento.classList.add("status--crowded")
       elemento.classList.remove("status--almost-full")
       elemento.classList.remove("status--safe")
-      return;
     }else if( valor >= this.props.max - 2){
       elemento.classList.add("status--almost-full")
       elemento.classList.remove("status--crowded")
@@ -80,13 +84,13 @@ export default class PlaceComponent extends Component {
         )}  */}
 
         <header className="place__header">
-          <h3>{this.props.name} - {this.props.id}</h3>
+          <h3>{this.props.name}</h3>
         </header>
         <div className="place__counter">
           <p>Actual <span>{this.state.counter}</span></p>
           <p>Max <span>{this.props.max}</span></p>
         </div>
-        <p className="place__status status--safe" id={this.props.id}></p>
+        <p className="place__status status--safe" id={this.props.id}/>
         <div className="place__manager">
           <button onClick={(e) => this.decrement(e)}>-</button>
           <p>{this.state.counter}</p>

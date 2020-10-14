@@ -8,12 +8,6 @@ import drinkingImg from '../../assets/drinking.png'
 import customImg from '../../assets/custom.svg'
 
 export default class ChoosePlace extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
 
   render() {
     return (
@@ -21,7 +15,7 @@ export default class ChoosePlace extends Component {
         <div className="choose__group">
           <h1 className="choose__title">Men's Bathroom</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('MEN_BATHROOM')}}>  
-            <img src={menImg} alt='Ladies Room' className="choose__img" style={{width: '70px'}} /> 
+            <img src={menImg} alt='Mens Bathroom' className="choose__img" style={{width: '70px'}} />
           </button>
         </div>
         <div className="choose__group">
@@ -33,19 +27,19 @@ export default class ChoosePlace extends Component {
         <div className="choose__group">
           <h1 className="choose__title">Courtyard</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('YARD')}}>  
-            <img src={benchImg} alt='Ladies Room' className="choose__img" /> 
+            <img src={benchImg} alt='Courtyard' className="choose__img" />
           </button>
         </div>
         <div className="choose__group">
-          <h1 className="choose__title">Dinking Fountain</h1>
+          <h1 className="choose__title">Drinking Fountain</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('DRINKING_FOUNTAIN')}}>  
-            <img src={drinkingImg} alt='Ladies Room' className="choose__img" /> 
+            <img src={drinkingImg} alt='Drinking Fountain' className="choose__img" />
           </button>
         </div>
         <div className="choose__group">
           <h1 className="choose__title">Custom</h1>
           <button className="choose__btn" onClick={()=>{this.props.type('CUSTOM')}}>  
-            <img src={customImg} alt='Ladies Room' className="choose__img" /> 
+            <img src={customImg} alt='Custom' className="choose__img" />
           </button>
         </div>
       </div>
