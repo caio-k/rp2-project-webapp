@@ -2,12 +2,15 @@ import React, {Component} from "react";
 import './css/place.css'
 import '../../styles/default.css'
 import AuthService from "../../services/auth.service";
+import UsePlaceService from "../../services/use-place.service";
 
 export default class PlaceComponent extends Component {
   constructor(props) {
     super(props);
+    this.onChangeNumberOfPeople = this.onChangeNumberOfPeople.bind(this);
 
     this.state = {
+      numberOfPeople: 1,
       ownCounter: 0,
       actualCounter: 0
     };
@@ -32,30 +35,81 @@ export default class PlaceComponent extends Component {
     });
   }
 
+  onChangeNumberOfPeople(e) {
+    this.setState({
+      numberOfPeople: e.target.value
+    });
+  }
+
   increment(e) {
     e.preventDefault();
-    (this.state.actualCounter >= 0 && this.state.actualCounter < this.props.max) ?
 
-      this.setState(() => {
-        return {actualCounter: this.state.actualCounter + 1}
-      })
-      :
-      alert("Valor não permitido")
+    const people = this.state.numberOfPeople;
 
-    this.placeStatus(this.state.actualCounter + 1)
+    if (people > 0 && people <= this.props.max - this.state.actualCounter) {
+      const user = AuthService.getCurrentUser();
+
+      UsePlaceService.increase(user.username, this.props.id, people).then(
+        () => {
+          this.setState({
+            ownCounter: parseInt(this.state.ownCounter) + parseInt(people),
+            actualCounter: parseInt(this.state.actualCounter) + parseInt(people)
+          });
+
+          this.placeStatus(this.state.actualCounter);
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.handleUseError(resMessage);
+        }
+      );
+    } else {
+      this.handleUseError("Invalid number of people");
+    }
   }
 
   decrement(e) {
     e.preventDefault();
-    (this.state.actualCounter > 0 && this.state.actualCounter <= this.props.max) ?
 
-      this.setState(() => {
-        return {actualCounter: this.state.actualCounter - 1}
-      })
-      :
-      alert("Valor não permitido")
+    const people = this.state.numberOfPeople;
 
-    this.placeStatus(this.state.actualCounter - 1)
+    if (people > 0 && people <= this.state.ownCounter) {
+      const user = AuthService.getCurrentUser();
+
+      UsePlaceService.decrease(user.username, this.props.id, people).then(
+        () => {
+          this.setState({
+            ownCounter: parseInt(this.state.ownCounter) - parseInt(people),
+            actualCounter: parseInt(this.state.actualCounter) - parseInt(people)
+          });
+
+          this.placeStatus(this.state.actualCounter);
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.handleUseError(resMessage);
+        }
+      );
+    } else {
+      this.handleUseError("Invalid number of people");
+    }
+  }
+
+  handleUseError(message) {
+    // change this handle error
+    alert(message);
   }
 
   placeStatus(counter) {
@@ -93,9 +147,21 @@ export default class PlaceComponent extends Component {
                  "place__status status--safe"
            }/>
         <div className="place__manager">
-          <button onClick={(e) => this.decrement(e)}>-</button>
-          <p>{this.state.actualCounter}</p>
-          <button onClick={(e) => this.increment(e)}>+</button>
+          <form className="form-inline">
+            <div className="form-group">
+              <button onClick={(e) => this.decrement(e)}>-</button>
+              <input
+                type="number"
+                min="1"
+                autoComplete="off"
+                className="form-control"
+                style={{width: "65px"}}
+                value={this.state.numberOfPeople}
+                onChange={this.onChangeNumberOfPeople}
+              />
+              <button onClick={(e) => this.increment(e)}>+</button>
+            </div>
+          </form>
         </div>
       </div>
     );

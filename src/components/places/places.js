@@ -21,10 +21,10 @@ export default class Places extends Component {
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
-    PlaceService.listAllPlacesWithFavoriteBySchool(this.props.school.id, user.username).then(
+    PlaceService.listAllPlacesWithFavoriteBySchool(this.props.location.state.school.id, user.username).then(
       res => {
         const placesToRender = res.data.filter((item) => {
-          return item.type === this.props.type
+          return item.type === this.props.location.state.type
         });
 
         this.setState({
@@ -34,7 +34,7 @@ export default class Places extends Component {
       }
     );
 
-    UsePlaceService.listAllUses(this.props.type, this.props.school.id).then(
+    UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
       response => {
         this.setState({
           allUses: response.data,
