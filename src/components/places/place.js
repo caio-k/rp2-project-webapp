@@ -3,7 +3,7 @@ import './css/place.css'
 import '../../styles/default.css'
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 export default class PlaceComponent extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ export default class PlaceComponent extends Component {
       numberOfPeople: 1,
       ownCounter: 0,
       actualCounter: 0,
-      alertStatus: false
+      alertStatus: false,
+      message: ""
     };
   }
 
@@ -68,17 +69,11 @@ export default class PlaceComponent extends Component {
             error.message ||
             error.toString();
 
-          this.handleUseError(resMessage);
+          this.popup(resMessage);
         }
       );
     } else {
-      this.setState({
-        alertStatus: true
-      });
-
-      setTimeout(()=>this.setState({
-        alertStatus: false
-      }), 3000);
+      this.popup("Number not allowed in \"" + this.props.name + "\"");
     }
   }
 
@@ -107,24 +102,12 @@ export default class PlaceComponent extends Component {
             error.message ||
             error.toString();
 
-          this.handleUseError(resMessage);
+          this.popup(resMessage);
         }
       );
     } else {
-      this.setState({
-        alertStatus: true
-      });
-
-      setTimeout(()=>this.setState({
-        alertStatus: false
-      }), 3000);
-
+      this.popup("Number not allowed in \"" + this.props.name + "\"");
     }
-  }
-
-  handleUseError(message) {
-    // change this handle error
-    alert(message);
   }
 
   placeStatus(counter) {
@@ -142,59 +125,72 @@ export default class PlaceComponent extends Component {
     }
   }
 
+  popup(message) {
+    this.setState({
+      message: message,
+      alertStatus: true
+    });
+
+    setTimeout(() => this.setState({
+      alertStatus: false
+    }), 3000);
+  }
+
   render() {
     return (
       <>
-
-      {this.state.alertStatus && (
-        <CSSTransition
-          in={this.state.alertStatus}
-          timeout={0}
-          classNames="alert"
-          appear={true}
-        >
-          <div className="alert alert-danger place_alert" role="alert">
-            Number not permited in "{this.props.name}-{this.props.id}"
-          </div>
-        </CSSTransition>
-      )}
-
-
-      <div className="place__container">
-        <header className="place__header">
-          <h3>{this.props.name}</h3>
-        </header>
-        <div className="place__counter">
-          <p>Own <span>{this.state.ownCounter}</span></p>
-          <p>Actual <span>{this.state.actualCounter}</span></p>
-          <p>Max <span>{this.props.max}</span></p>
-        </div>
-        <p id={this.props.id}
-           className={
-             this.state.actualCounter >= this.props.max ?
-               "place__status status--crowded" :
-               this.state.actualCounter >= this.props.max / 2 ?
-                 "place__status status--almost-full" :
-                 "place__status status--safe"
-           }/>
-        <div className="place__manager">
-          <form className="form-inline">
-            <div className="form-group">
-              <button onClick={(e) => this.decrement(e)}>-</button>
-              <input
-                type="number"
-                min="1"
-                autoComplete="off"
-                className="form-control"
-                style={{width: "65px"}}
-                value={this.state.numberOfPeople}
-                onChange={this.onChangeNumberOfPeople}
-              />
-              <button onClick={(e) => this.increment(e)}>+</button>
+        {this.state.alertStatus && (
+          <CSSTransition
+            in={this.state.alertStatus}
+            timeout={0}
+            classNames="alert-position alert"
+            appear={true}
+          >
+            <div className="alert alert-danger place_alert" role="alert">
+              {this.state.message}
             </div>
-          </form>
+          </CSSTransition>
+        )}
+
+        <div className="place__container">
+          <header className="place__header">
+            <h3>{this.props.name}</h3>
+          </header>
+          <div className="place__counter">
+            <p>Own<span>{this.state.ownCounter}</span></p>
+            <p>Actual<span>{this.state.actualCounter}</span></p>
+            <p>Max<span>{this.props.max}</span></p>
+          </div>
+          <p id={this.props.id}
+             className={
+               this.state.actualCounter >= this.props.max ?
+                 "place__status status--crowded" :
+                 this.state.actualCounter >= this.props.max / 2 ?
+                   "place__status status--almost-full" :
+                   "place__status status--safe"
+             }/>
+          <div className="place__manager">
+            <form className="form-inline" style={{maxHeight: "38px"}}>
+              <div className="form-group">
+                <button onClick={(e) => this.decrement(e)}>-</button>
+              </div>
+              <div className="form-group">
+                <input
+                  type="number"
+                  min="1"
+                  autoComplete="off"
+                  className="form-control"
+                  style={{width: "65px"}}
+                  value={this.state.numberOfPeople}
+                  onChange={this.onChangeNumberOfPeople}
+                />
+              </div>
+              <div className="form-group">
+                <button onClick={(e) => this.increment(e)}>+</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
       </>
     );
   }

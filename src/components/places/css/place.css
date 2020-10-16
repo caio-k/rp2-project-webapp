@@ -111,7 +111,8 @@
 
 .place_alert{
     position: absolute;
-    top: 90px;
+    top: 20px;
+    z-index: 100;
     transition: opacity 0.4s linear;
 }
 
@@ -131,4 +132,8 @@
 .alert-exit-done{
     opacity: 0;
     transition: opacity 0.4s linear;
+}
+
+.alert-position {
+    position: fixed;
 }
