@@ -3,6 +3,7 @@ import './css/place.css'
 import '../../styles/default.css'
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export default class PlaceComponent extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class PlaceComponent extends Component {
     this.state = {
       numberOfPeople: 1,
       ownCounter: 0,
-      actualCounter: 0
+      actualCounter: 0,
+      alertStatus: false
     };
   }
 
@@ -70,7 +72,13 @@ export default class PlaceComponent extends Component {
         }
       );
     } else {
-      this.handleUseError("Invalid number of people");
+      this.setState({
+        alertStatus: true
+      });
+
+      setTimeout(()=>this.setState({
+        alertStatus: false
+      }), 3000);
     }
   }
 
@@ -103,7 +111,14 @@ export default class PlaceComponent extends Component {
         }
       );
     } else {
-      this.handleUseError("Invalid number of people");
+      this.setState({
+        alertStatus: true
+      });
+
+      setTimeout(()=>this.setState({
+        alertStatus: false
+      }), 3000);
+
     }
   }
 
@@ -129,6 +144,22 @@ export default class PlaceComponent extends Component {
 
   render() {
     return (
+      <>
+
+      {this.state.alertStatus && (
+        <CSSTransition
+          in={this.state.alertStatus}
+          timeout={0}
+          classNames="alert"
+          appear={true}
+        >
+          <div className="alert alert-danger place_alert" role="alert">
+            Number not permited in "{this.props.name}-{this.props.id}"
+          </div>
+        </CSSTransition>
+      )}
+
+
       <div className="place__container">
         <header className="place__header">
           <h3>{this.props.name}</h3>
@@ -164,6 +195,7 @@ export default class PlaceComponent extends Component {
           </form>
         </div>
       </div>
+      </>
     );
   }
 }

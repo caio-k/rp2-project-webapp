@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import "../../styles/management/management.css";
+import "./css/place.css";
 
 export default class LimitUser extends Component {
 
@@ -8,9 +8,8 @@ export default class LimitUser extends Component {
 
     return (
       <>
-        <h6 style={{paddingTop: "10px"}}>Number not permited in "{this.props.name}-{this.props.id}"</h6>
-        <div className="modal-buttons">
-          <button className="btn btn-danger" onClick={this.props.handleClose}>Ok</button>
+        <div className="alert alert-danger place_alert" role="alert">
+          Number not permited in "{this.props.name}-{this.props.id}"
         </div>
       </>
     );

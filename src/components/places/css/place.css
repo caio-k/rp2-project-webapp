@@ -112,4 +112,23 @@
 .place_alert{
     position: absolute;
     top: 90px;
+    transition: opacity 0.4s linear;
+}
+
+.alert-appear{
+    opacity: 0;
+}
+
+.alert-appear .alert-appear-active{
+    opacity: 1;
+}
+
+.alert-exit{
+    opacity: 1;
+    transition: opacity 0.4s linear;
+}
+
+.alert-exit-done{
+    opacity: 0;
+    transition: opacity 0.4s linear;
 }
