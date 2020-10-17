@@ -1,0 +1,30 @@
+.exit-board {
+    color: #FFFFFF;
+    background-color: #0c5e8c;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.exit-board > p {
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+}
+.exit-board > div {
+    min-height: 200px;
+    max-height: 200px;
+    background-color: #b2e4e8;
+}
+.exit-board td {
+    cursor: pointer;
+    padding: 5px;
+}
+.exit-board td > div {
+    border-radius: 5px;
+    background-color: rgb(242, 252, 253);
+}
+.exit-board td > div > span {
+    padding: 5px;
+}
+
+
+
