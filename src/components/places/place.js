@@ -3,7 +3,7 @@ import './css/place.css'
 import '../../styles/default.css'
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
-import {CSSTransition} from 'react-transition-group';
+import PopupMessage from '../utils/popup-message.component'
 
 export default class PlaceComponent extends Component {
   constructor(props) {
@@ -15,7 +15,8 @@ export default class PlaceComponent extends Component {
       ownCounter: 0,
       actualCounter: 0,
       alertStatus: false,
-      message: ""
+      message: "",
+      popupSuccess: false
     };
   }
 
@@ -69,11 +70,11 @@ export default class PlaceComponent extends Component {
             error.message ||
             error.toString();
 
-          this.popup(resMessage);
+          this.popup(resMessage, false);
         }
       );
     } else {
-      this.popup("Number not allowed in \"" + this.props.name + "\"");
+      this.popup("Number not allowed in \"" + this.props.name + "\"", false);
     }
   }
 
@@ -102,11 +103,11 @@ export default class PlaceComponent extends Component {
             error.message ||
             error.toString();
 
-          this.popup(resMessage);
+          this.popup(resMessage, false);
         }
       );
     } else {
-      this.popup("Number not allowed in \"" + this.props.name + "\"");
+      this.popup("Number not allowed in \"" + this.props.name + "\"", false);
     }
   }
 
@@ -125,10 +126,11 @@ export default class PlaceComponent extends Component {
     }
   }
 
-  popup(message) {
+  popup(message, popupSuccess) {
     this.setState({
       message: message,
-      alertStatus: true
+      alertStatus: true,
+      popupSuccess: popupSuccess
     });
 
     setTimeout(() => this.setState({
@@ -140,16 +142,7 @@ export default class PlaceComponent extends Component {
     return (
       <>
         {this.state.alertStatus && (
-          <CSSTransition
-            in={this.state.alertStatus}
-            timeout={0}
-            classNames="alert-position alert"
-            appear={true}
-          >
-            <div className="alert alert-danger place_alert" role="alert">
-              {this.state.message}
-            </div>
-          </CSSTransition>
+          <PopupMessage message={this.state.message} success={this.state.popupSuccess}/>
         )}
 
         <div className="place__container">
