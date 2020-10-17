@@ -31,6 +31,8 @@ export default class Places extends Component {
           renderPlaces: placesToRender,
           loading1: false
         });
+
+        this.sortPlaces();
       }
     );
 
@@ -47,6 +49,15 @@ export default class Places extends Component {
   getAllUsesByPlaceId(id) {
     return this.state.allUses.filter(item => {
       return item.placeId === id
+    });
+  }
+
+  sortPlaces() {
+    this.state.renderPlaces.sort(function (a, b) {
+      return a.favorite && !b.favorite ? -1 :
+        !a.favorite && b.favorite ? 1 :
+          a.name < b.name ? -1 :
+            b.name < a.name ? 1 : 0
     });
   }
 
@@ -70,6 +81,7 @@ export default class Places extends Component {
                     type={item.type}
                     max={item.maxPeople}
                     limit_time={item.limitTimeSeconds}
+                    favorite={item.favorite}
                     school={this.props.school}
                     uses={this.getAllUsesByPlaceId(item.placeId)}
                   />
