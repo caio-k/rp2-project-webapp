@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import ExitService from "../../services/exit.service"
 import SchoolService from "../../services/school.service"
+import AuthService from "../../services/auth.service"
 import Spinner from "../utils/spinner.component";
+import PopupMessage from "../utils/popup-message.component";
 
 import "./css/board-exit.css"
 
@@ -9,13 +11,19 @@ export default class BoardExit extends Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
+    this.renderExitLog = this.renderExitLog.bind(this);
+    this.releaseStudents = this.releaseStudents.bind(this);
 
     this.state = {
       exits: [],
       exitLogs: [],
       school: {},
-      exitNameForExitLog: "",
-      loading: true
+      exitForExitLog: {},
+      loading: true,
+      loadingLogs: false,
+      alertStatus: false,
+      message: "",
+      popupSuccess: false
     };
   }
 
@@ -31,23 +39,80 @@ export default class BoardExit extends Component {
         });
       },
       error => {
-        //  handle error
+        this.handleError(error);
+
+        this.setState({
+          loading: false
+        });
       }
     );
   }
 
   openExitLogs(exit) {
+    this.setState({
+      loadingLogs: true
+    });
+
     ExitService.allValidTimestampsByExitId(exit.exitId).then(
       response => {
         this.setState({
           exitLogs: response.data,
-          exitNameForExitLog: exit.exitName
+          exitForExitLog: exit,
+          loadingLogs: false
         });
       },
       error => {
-        //  handle error
+        this.handleError(error);
+
+        this.setState({
+          loadingLogs: false
+        });
       }
     )
+  }
+
+  releaseStudents() {
+    const currentUser = AuthService.getCurrentUser();
+
+    ExitService.addExitLog(currentUser.username, this.state.exitForExitLog.exitId).then(
+      response => {
+        let filtered = this.state.exitLogs.filter(element => {
+          return element.message.split(' ')[2] !== currentUser.username
+        });
+
+        filtered.push(response.data);
+
+        this.setState({
+          exitLogs: filtered
+        });
+      },
+      error => {
+        this.handleError(error);
+      }
+    )
+  }
+
+  handleError(error) {
+    const resMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    this.popup(resMessage, false);
+  }
+
+  popup(message, popupSuccess) {
+    this.setState({
+      message: message,
+      alertStatus: true,
+      popupSuccess: popupSuccess
+    });
+
+    setTimeout(() => this.setState({
+      alertStatus: false
+    }), 3000);
   }
 
   renderRow(row) {
@@ -60,11 +125,25 @@ export default class BoardExit extends Component {
     );
   }
 
+  renderExitLog(row) {
+    return (
+      <tr key={row.message}>
+        <td>
+          <div><span>{row.message}</span></div>
+        </td>
+      </tr>
+    )
+  }
+
   render() {
     return (
       <div className="container">
         {this.state.loading && (
           <Spinner/>
+        )}
+
+        {this.state.alertStatus && (
+          <PopupMessage message={this.state.message} success={this.state.popupSuccess}/>
         )}
 
         {!this.state.loading && (
@@ -85,9 +164,26 @@ export default class BoardExit extends Component {
               </div>
             </div>
 
-            {this.state.exitNameForExitLog !== "" && (
-              // TO DO
-              <span>exit logs...</span>
+            {this.state.loadingLogs && (
+              <div style={{marginTop: "20px"}}>
+                <Spinner/>
+              </div>
+            )}
+
+            {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
+              <div className="exit-log-board">
+                <p>{this.state.exitForExitLog.exitName}</p>
+                <div className="table-overflow logs">
+                  <table className="table table-sm table-hover">
+                    <tbody>
+                    {this.state.exitLogs.map(this.renderExitLog)}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="release-btn">
+                  <button onClick={() => this.releaseStudents()}>Release Students</button>
+                </div>
+              </div>
             )}
           </>
         )}

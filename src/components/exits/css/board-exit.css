@@ -26,5 +26,35 @@
     padding: 5px;
 }
 
-
-
+.exit-log-board {
+    color: #FFFFFF;
+    text-align: center;
+    background-color: #0c5e8c;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: 20px;
+}
+.exit-log-board > p {
+    font-size: 20px;
+    line-height: 40px;
+}
+.logs {
+    min-height: 152px;
+    max-height: 152px;
+    background-color: #b2e4e8;
+}
+.release-btn {
+    padding: 5px;
+    background-color: #b2e4e8;
+    border-top: 2px solid #0c5e8c;
+    display: flex;
+    justify-content: center
+}
+.release-btn > button {
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 0 30px;
+    border-radius: 5px;
+    border: 1px solid #0c5e8c;
+    background-color: #0c5e8c;
+}
