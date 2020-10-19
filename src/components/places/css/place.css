@@ -1,4 +1,4 @@
-.place__container{
+.place__container {
     width: 300px;
     border: 1px solid var(--cor-words-principal);
     margin: 10px;
@@ -18,13 +18,14 @@
     font-size: 1.3rem;
 }
 
-.place__img{
+.place__img {
     max-width: 100%;
 }
-.place__counter{
+
+.place__counter {
     display: flex;
     justify-content: space-around;
-    height: 0px;
+    height: 0;
     position: relative;
     top: 40px;
     color: var(--cor-words-principal);
@@ -38,7 +39,7 @@
     text-align: center;
 }
 
-.place__counter p span{
+.place__counter p span {
     border-radius: 100%;
     width: 50px;
     min-height: 50px;
@@ -49,21 +50,17 @@
     color: black;
 }
 
-.place__status{
+.place__status {
     height: var(--line-heigth-content);
     display: flex;
     justify-content: center;
-    align-items: center;
     color: var(--cor-words-principal);
-    background-color: var(--cor-crowded);
     font-weight: bold;
-    display: flex;
-    justify-content: center;
     align-items: flex-end;
     font-size: 30px;
 }
 
-.place__manager{
+.place__manager {
     background: var(--cor-bg-header-1);
     display: flex;
     justify-content: center;
@@ -72,10 +69,9 @@
     color: var(--cor-words-principal);
 }
 
-.place__manager button{
+.place__manager button {
     width: 25px;
     height: 25px;
-    border: none;
     border-radius: 100%;
     margin: 5px;
     display: flex;
@@ -87,49 +83,52 @@
     font-weight: bold;
 }
 
-.status--crowded{
+.status--crowded {
     background-color: var(--status--crowded);
 }
-.status--crowded::before{
+
+.status--crowded::before {
     content: "Crowded";
 }
 
-.status--almost-full{
+.status--almost-full {
     background-color: var(--status--almost-full);
-}   
-.status--almost-full::before{
+}
+
+.status--almost-full::before {
     content: "Almost Full";
 }
 
-.status--safe{
+.status--safe {
     background-color: var(--status--safe);
     content: "Safe";
 }
-.status--safe::before{
+
+.status--safe::before {
     content: "Safe";
 }
 
-.place_alert{
+.place_alert {
     position: absolute;
     top: 20px;
     z-index: 100;
     transition: opacity 0.4s linear;
 }
 
-.alert-appear{
+.alert-appear {
     opacity: 0;
 }
 
-.alert-appear .alert-appear-active{
+.alert-appear .alert-appear-active {
     opacity: 1;
 }
 
-.alert-exit{
+.alert-exit {
     opacity: 1;
     transition: opacity 0.4s linear;
 }
 
-.alert-exit-done{
+.alert-exit-done {
     opacity: 0;
     transition: opacity 0.4s linear;
 }
