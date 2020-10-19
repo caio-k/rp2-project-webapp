@@ -11,9 +11,10 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import BoardAdmin from "./components/management/board-admin.component";
-import BoardExit from "./components/board-exit.component";
-import BoardPlace from "./components/board-place.component";
+import BoardExit from "./components/exits/board-exit.component";
+import BoardPlace from "./components/places/board-place.component";
 import BoardSchool from "./components/board-school.component";
+import UsePlace from "./components/places/places";
 
 class App extends Component {
   constructor(props) {
@@ -144,6 +145,7 @@ class App extends Component {
               <Route exact path="/register" component={Register}/>
               <Route path="/school" component={BoardSchool}/>
               <Route path="/place" component={BoardPlace}/>
+              <Route path="/use-place" component={UsePlace}/>
               <Route path="/exit" component={BoardExit}/>
               <Route path="/admin" component={BoardAdmin}/>
             </Switch>
