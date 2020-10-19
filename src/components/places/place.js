@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './css/place.css'
 import '../../styles/default.css'
+import '../../styles/tooltip.css'
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
 import PopupMessage from '../utils/popup-message.component'
@@ -165,7 +166,7 @@ export default class PlaceComponent extends Component {
           <div className="place__manager">
             <form className="form-inline" style={{maxHeight: "38px"}}>
               <div className="form-group">
-                <button onClick={(e) => this.decrement(e)}>-</button>
+                <button className="custom-tooltip" data-tooltip="Receive" onClick={(e) => this.decrement(e)}>-</button>
               </div>
               <div className="form-group">
                 <input
@@ -179,7 +180,7 @@ export default class PlaceComponent extends Component {
                 />
               </div>
               <div className="form-group">
-                <button onClick={(e) => this.increment(e)}>+</button>
+                <button className="custom-tooltip" data-tooltip="Send" onClick={(e) => this.increment(e)}>+</button>
               </div>
             </form>
           </div>
