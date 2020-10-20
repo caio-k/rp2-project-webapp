@@ -38,6 +38,8 @@ export default class PlaceComponent extends Component {
       ownCounter: ownCounter,
       actualCounter: actualCounter
     });
+
+    this.blinkingBackground(ownCounter);
   }
 
   onChangeNumberOfPeople(e) {
@@ -51,7 +53,11 @@ export default class PlaceComponent extends Component {
 
     const people = this.state.numberOfPeople;
 
-    if (people > 0 && people <= this.props.max - this.state.actualCounter) {
+    if (people <= 0) {
+      this.popup("Number of people less than or equal to zero is not allowed", false);
+    } else if (people > this.props.max - this.state.actualCounter) {
+      this.popup("The number of people to be sent is greater than the available limit", false);
+    } else {
       const user = AuthService.getCurrentUser();
 
       UsePlaceService.increase(user.username, this.props.id, people).then(
@@ -74,8 +80,6 @@ export default class PlaceComponent extends Component {
           this.popup(resMessage, false);
         }
       );
-    } else {
-      this.popup("Number not allowed in \"" + this.props.name + "\"", false);
     }
   }
 
@@ -84,7 +88,11 @@ export default class PlaceComponent extends Component {
 
     const people = this.state.numberOfPeople;
 
-    if (people > 0 && people <= this.state.ownCounter) {
+    if (people <= 0) {
+      this.popup("Number of people less than or equal to zero is not allowed", false);
+    } else if (people > this.state.ownCounter) {
+      this.popup("Number of people to be received is greater than the number of people sent", false);
+    } else {
       const user = AuthService.getCurrentUser();
 
       UsePlaceService.decrease(user.username, this.props.id, people).then(
@@ -107,8 +115,6 @@ export default class PlaceComponent extends Component {
           this.popup(resMessage, false);
         }
       );
-    } else {
-      this.popup("Number not allowed in \"" + this.props.name + "\"", false);
     }
   }
 
@@ -125,6 +131,18 @@ export default class PlaceComponent extends Component {
     } else {
       element.classList.add("status--safe")
     }
+
+    this.blinkingBackground(this.state.ownCounter);
+  }
+
+  blinkingBackground(ownCounter) {
+    let ownCounterElement = document.getElementById(this.props.id + "-own-counter");
+
+    if (ownCounter === 0) {
+      ownCounterElement.classList.remove("blink-bg")
+    } else {
+      ownCounterElement.classList.add("blink-bg")
+    }
   }
 
   popup(message, popupSuccess) {
@@ -136,7 +154,7 @@ export default class PlaceComponent extends Component {
 
     setTimeout(() => this.setState({
       alertStatus: false
-    }), 3000);
+    }), 6000);
   }
 
   render() {
@@ -151,7 +169,7 @@ export default class PlaceComponent extends Component {
             <h3>{this.props.name}</h3>
           </header>
           <div className="place__counter">
-            <p>Own<span>{this.state.ownCounter}</span></p>
+            <p>Own<span id={this.props.id + "-own-counter"}>{this.state.ownCounter}</span></p>
             <p>Actual<span>{this.state.actualCounter}</span></p>
             <p>Max<span>{this.props.max}</span></p>
           </div>
