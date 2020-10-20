@@ -53,12 +53,16 @@ export default class Places extends Component {
   }
 
   sortPlaces() {
-    this.state.renderPlaces.sort(function (a, b) {
+    const renderPlaces = [...this.state.renderPlaces];
+
+    renderPlaces.sort(function (a, b) {
       return a.favorite && !b.favorite ? -1 :
         !a.favorite && b.favorite ? 1 :
           a.name < b.name ? -1 :
             b.name < a.name ? 1 : 0
     });
+
+    this.setState({renderPlaces});
   }
 
   render() {
@@ -71,6 +75,7 @@ export default class Places extends Component {
 
         {!(this.state.loading1 || this.state.loading2) && (
           <>
+            <p className="school-title">{this.props.location.state.school.name}</p>
             {this.state.renderPlaces.length > 0 && (
               <div className="places_cards">
                 {this.state.renderPlaces.map((item) => (
