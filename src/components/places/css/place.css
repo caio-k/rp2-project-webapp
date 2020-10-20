@@ -136,3 +136,25 @@
 .alert-position {
     position: fixed;
 }
+
+.blink-bg {
+    animation: blinkingBackground 2s infinite;
+}
+
+@keyframes blinkingBackground {
+    0% {
+        background-color: #FFFFFF;
+    }
+    25% {
+        background-color: #b2e4e8;
+    }
+    50% {
+        background-color: #65c8d0;
+    }
+    75% {
+        background-color: #4cb0c3;
+    }
+    100% {
+        background-color: #E4FFF6;
+    }
+}

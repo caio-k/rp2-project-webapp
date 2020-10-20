@@ -38,6 +38,8 @@ export default class PlaceComponent extends Component {
       ownCounter: ownCounter,
       actualCounter: actualCounter
     });
+
+    this.blinkingBackground(ownCounter);
   }
 
   onChangeNumberOfPeople(e) {
@@ -129,6 +131,18 @@ export default class PlaceComponent extends Component {
     } else {
       element.classList.add("status--safe")
     }
+
+    this.blinkingBackground(this.state.ownCounter);
+  }
+
+  blinkingBackground(ownCounter) {
+    let ownCounterElement = document.getElementById(this.props.id + "-own-counter");
+
+    if (ownCounter === 0) {
+      ownCounterElement.classList.remove("blink-bg")
+    } else {
+      ownCounterElement.classList.add("blink-bg")
+    }
   }
 
   popup(message, popupSuccess) {
@@ -155,7 +169,7 @@ export default class PlaceComponent extends Component {
             <h3>{this.props.name}</h3>
           </header>
           <div className="place__counter">
-            <p>Own<span>{this.state.ownCounter}</span></p>
+            <p>Own<span id={this.props.id + "-own-counter"}>{this.state.ownCounter}</span></p>
             <p>Actual<span>{this.state.actualCounter}</span></p>
             <p>Max<span>{this.props.max}</span></p>
           </div>
