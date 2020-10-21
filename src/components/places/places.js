@@ -3,6 +3,7 @@ import PlaceComponent from './place';
 import PlaceService from '../../services/place.service';
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
+import UserService from "../../services/user.service";
 import Spinner from "../utils/spinner.component";
 import './css/places.css'
 
@@ -65,6 +66,42 @@ export default class Places extends Component {
     this.setState({renderPlaces});
   }
 
+  favoritePlaces(itemId) {
+    const currentUser = AuthService.getCurrentUser();
+
+    const itemIndex = this.state.renderPlaces.findIndex(element => {
+      return element.placeId === itemId;
+    });
+
+    if (this.state.renderPlaces[itemIndex].favorite) {
+      UserService.removeFavoritePlace(currentUser.username, itemId).then(
+        () => {
+          this.inverseFavorite(itemIndex);
+        },
+        () => {
+          // handle error
+        }
+      );
+    } else {
+      UserService.addFavoritePlace(currentUser.username, itemId).then(
+        () => {
+          this.inverseFavorite(itemIndex);
+        },
+        () => {
+          // handle error
+        }
+      );
+    }
+  }
+
+  inverseFavorite(itemIndex) {
+    const renderPlaces = [...this.state.renderPlaces];
+    const place = {...renderPlaces[itemIndex]};
+    place["favorite"] = !place["favorite"];
+    renderPlaces[itemIndex] = place;
+    this.setState({renderPlaces});
+  }
+
   render() {
     return (
       <div className="container">
@@ -89,6 +126,7 @@ export default class Places extends Component {
                     favorite={item.favorite}
                     school={this.props.school}
                     uses={this.getAllUsesByPlaceId(item.placeId)}
+                    onFavorite={() => this.favoritePlaces(item.placeId)}
                   />
                 ))}
               </div>

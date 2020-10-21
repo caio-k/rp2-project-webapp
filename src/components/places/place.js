@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './css/place.css'
 import '../../styles/default.css'
 import '../../styles/tooltip.css'
+import '../../styles/heart.css'
 import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
 import PopupMessage from '../utils/popup-message.component'
@@ -167,6 +168,10 @@ export default class PlaceComponent extends Component {
         <div className="place__container">
           <header className="place__header">
             <h3>{this.props.name}</h3>
+            <div className="heart"
+                 style={{backgroundColor: this.props.favorite ? "red" : "gray"}}
+                 onClick={this.props.onFavorite}
+            />
           </header>
           <div className="place__counter">
             <p>Own<span id={this.props.id + "-own-counter"}>{this.state.ownCounter}</span></p>
