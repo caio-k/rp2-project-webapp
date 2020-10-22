@@ -15,7 +15,7 @@ export default class Places extends Component {
       renderPlaces: [],
       allUses: [],
       loading1: true,
-      loading2: true,
+      loading2: true
     };
   }
 
@@ -106,7 +106,9 @@ export default class Places extends Component {
 
         {!(this.state.loading1 || this.state.loading2) && (
           <>
-            <p className="school-title">{this.props.location.state.school.name}</p>
+            <div className="place_board_header">
+              <p>{this.props.location.state.school.name}</p>
+            </div>
             {this.state.renderPlaces.length > 0 && (
               <div className="places_cards">
                 {this.state.renderPlaces.map((item) => (
