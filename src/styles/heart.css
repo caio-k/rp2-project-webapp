@@ -4,7 +4,6 @@
     width: 12px;
     right: 15px;
     transform: rotate(-45deg) scale(1);
-    animation: pulse 1s linear infinite;
     cursor: pointer;
 }
 
