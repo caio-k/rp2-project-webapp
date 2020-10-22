@@ -167,9 +167,9 @@ export default class PlaceComponent extends Component {
 
         <div className="place__container">
           <header className="place__header">
-            <h3>{this.props.name}</h3>
+            <h3 style={{fontSize:"18px"}}>{this.props.name}</h3>
             <div className="heart"
-                 style={{backgroundColor: this.props.favorite ? "red" : "gray"}}
+                 style={{backgroundColor: this.props.favorite ? "#F44336" : "#989898"}}
                  onClick={this.props.onFavorite}
             />
           </header>

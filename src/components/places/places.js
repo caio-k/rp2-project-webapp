@@ -77,18 +77,12 @@ export default class Places extends Component {
       UserService.removeFavoritePlace(currentUser.username, itemId).then(
         () => {
           this.inverseFavorite(itemIndex);
-        },
-        () => {
-          // handle error
         }
       );
     } else {
       UserService.addFavoritePlace(currentUser.username, itemId).then(
         () => {
           this.inverseFavorite(itemIndex);
-        },
-        () => {
-          // handle error
         }
       );
     }
