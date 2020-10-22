@@ -12,14 +12,13 @@
 }
 
 .place__header h3 {
-    margin-right: 30px;
-    overflow: hidden;
+    margin-left: 15px;
+    margin-top: 5px;
 }
 
 .place__header, .place__header h3 {
     background: var(--cor-bg-header-1);
     display: flex;
-    justify-content: center;
     align-items: center;
     color: var(--cor-words-principal);
     min-height: 40px;
@@ -36,7 +35,7 @@
     justify-content: space-around;
     height: 0;
     position: relative;
-    top: 40px;
+    top: 45px;
     color: var(--cor-words-principal);
 }
 
@@ -152,18 +151,9 @@
 
 @keyframes blinkingBackground {
     0% {
-        background-color: #FFFFFF;
-    }
-    25% {
         background-color: #b2e4e8;
     }
     50% {
         background-color: #65c8d0;
-    }
-    75% {
-        background-color: #4cb0c3;
-    }
-    100% {
-        background-color: #E4FFF6;
     }
 }
