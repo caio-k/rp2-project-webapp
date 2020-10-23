@@ -5,7 +5,9 @@ import AuthService from "../../services/auth.service";
 import UsePlaceService from "../../services/use-place.service";
 import UserService from "../../services/user.service";
 import Spinner from "../utils/spinner.component";
-import './css/places.css'
+import Refresh from "../../assets/refresh.svg";
+import './css/places.css';
+import '../../styles/tooltip.css'
 
 export default class Places extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ export default class Places extends Component {
       renderPlaces: [],
       allUses: [],
       loading1: true,
-      loading2: true
+      loading2: true,
+      refreshing: false
     };
   }
 
@@ -42,6 +45,25 @@ export default class Places extends Component {
         this.setState({
           allUses: response.data,
           loading2: false
+        });
+      }
+    );
+  }
+
+  refreshAllUses() {
+    this.setState({
+      refreshing: true
+    });
+
+    UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
+      response => {
+        this.setState({
+          allUses: response.data,
+          refreshing: false
+        });
+
+        this.state.renderPlaces.forEach(element => {
+          element.ref.loadData();
         });
       }
     );
@@ -108,6 +130,14 @@ export default class Places extends Component {
           <>
             <div className="place_board_header">
               <p>{this.props.location.state.school.name}</p>
+              <div className="custom-tooltip" data-tooltip="Refresh">
+                <img
+                  src={Refresh}
+                  alt="Refresh"
+                  className={this.state.refreshing ? "spin" : ""}
+                  onClick={() => this.refreshAllUses()}
+                />
+              </div>
             </div>
             {this.state.renderPlaces.length > 0 && (
               <div className="places_cards">
@@ -123,6 +153,7 @@ export default class Places extends Component {
                     school={this.props.school}
                     uses={this.getAllUsesByPlaceId(item.placeId)}
                     onFavorite={() => this.favoritePlaces(item.placeId)}
+                    onRef={ref => (item.ref = ref)}
                   />
                 ))}
               </div>
