@@ -21,6 +21,15 @@ class PlaceService {
     });
   }
 
+  listAllFavoritePlacesBySchool(schoolId, username) {
+    return serverApi.get(PATH_API + 'allFavoritePlacesBySchool', {
+      params: {
+        schoolId: schoolId,
+        username: username
+      }
+    });
+  }
+
   createPlace(placeName, placeLimitTimeSeconds, placeMaxPeople, placeType, placeSchoolId) {
     return serverApi.post(PATH_API + 'addPlace', {
       placeName,

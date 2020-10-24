@@ -12,6 +12,15 @@ class UsePlaceService {
     });
   }
 
+  listAllUsesOfFavoritePlacesBySchool(username, schoolId) {
+    return serverApi.get(PATH_API + 'allUsesFavoritePlaces', {
+      params: {
+        username: username,
+        schoolId: schoolId
+      }
+    });
+  }
+
   increase(username, placeId, numberOfPeople) {
     return serverApi.put(PATH_API + 'increase', {
       username,
