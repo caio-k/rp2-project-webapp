@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import logo from "./logo-safeschool-lateral-tst1.svg"
+import logo from "./logo-oficial.png"
 
 import AuthService from "./services/auth.service";
 
@@ -60,7 +60,7 @@ class App extends Component {
               <img
                 src={logo}
                 alt="SafeSchool"
-                width="190"
+                width="143"
                 height="60"
               />
             </Link>

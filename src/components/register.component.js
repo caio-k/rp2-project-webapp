@@ -7,7 +7,7 @@ import {isEmail} from "validator";
 import AuthService from "../services/auth.service";
 
 import "../styles/public_form.css"
-import profilePic from "../profile_pic.svg"
+import profilePic from "../assets/profile_pic.svg"
 
 const required = value => {
   if (!value) {
