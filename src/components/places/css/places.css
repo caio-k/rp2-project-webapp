@@ -1,0 +1,56 @@
+.places_cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.place_board_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.place_board_header p {
+    color: #00bfa6;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 20px;
+}
+
+.place_board_header div {
+    margin-right: 20px;
+}
+
+.place_board_header img {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.spin {
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}

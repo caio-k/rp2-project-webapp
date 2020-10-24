@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 
 import AuthService from "../services/auth.service";
-import SchoolService from "../services/school.service"
+import SchoolService from "../services/school.service";
+import Spinner from "../components/utils/spinner.component";
 
 import "../styles/school_selector.css"
 
@@ -12,7 +13,8 @@ export default class BoardSchool extends Component {
 
     this.state = {
       message: "",
-      schools: []
+      schools: [],
+      loading: true
     };
   }
 
@@ -28,11 +30,13 @@ export default class BoardSchool extends Component {
       response => {
         if (response.data.length) {
           this.setState({
-            schools: response.data
+            schools: response.data,
+            loading: false
           });
         } else {
           this.setState({
-            message: "Oops, you are not registered in any school. Please contact your school principal and ask to be added."
+            message: "Oops, you are not registered in any school. Please contact your school principal and ask to be added.",
+            loading: false
           });
         }
       },
@@ -43,7 +47,8 @@ export default class BoardSchool extends Component {
               error.response.data &&
               error.response.data.message) ||
             error.message ||
-            error.toString()
+            error.toString(),
+          loading: false
         });
       }
     )
@@ -53,30 +58,35 @@ export default class BoardSchool extends Component {
     const {message, schools} = this.state;
 
     return (
-      <div className="board">
-        <div className="board-header">
-          <span>Choose a school</span>
-        </div>
+      <>
+        {this.state.loading ?
+          <Spinner/> :
+          <div className="board">
+            <div className="board-header">
+              <span>Choose a school</span>
+            </div>
 
-        {schools.length > 0 && (
-          <>
-            {schools.map(school =>
-              <div className="card-school" key={school.id} onClick={() => this.onSelectSchool(school)}>
-                <div className="header">
-                  {school.name}
-                </div>
-                <div className="content">
-                  School Principal: {school.schoolPrincipalUsername}
-                </div>
-              </div>
+            {schools.length > 0 && (
+              <>
+                {schools.map(school =>
+                  <div className="card-school" key={school.id} onClick={() => this.onSelectSchool(school)}>
+                    <div className="header">
+                      {school.name}
+                    </div>
+                    <div className="content">
+                      School Principal: {school.schoolPrincipalUsername}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
-          </>
-        )}
 
-        {schools.length === 0 && (
-          <span className="message">{message}</span>
-        )}
-      </div>
+            {schools.length === 0 && (
+              <span className="message">{message}</span>
+            )}
+          </div>
+        }
+      </>
     );
   }
 }

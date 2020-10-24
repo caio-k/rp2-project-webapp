@@ -1,0 +1,30 @@
+.heart {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    right: 15px;
+    transform: rotate(-45deg) scale(1);
+    cursor: pointer;
+}
+
+.heart::after {
+    background: inherit;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    height: 12px;
+    width: 12px;
+}
+
+.heart::before {
+    background: inherit;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -50%;
+    height: 12px;
+    width: 12px;
+}

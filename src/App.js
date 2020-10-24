@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import logo from "./logo-safeschool-lateral-tst1.svg"
+import logo from "./logo-oficial.png"
 
 import AuthService from "./services/auth.service";
 
@@ -12,8 +12,9 @@ import Register from "./components/register.component";
 import Home from "./components/home.component";
 import BoardAdmin from "./components/management/board-admin.component";
 import BoardExit from "./components/board-exit.component";
-import BoardPlace from "./components/board-place.component";
+import BoardPlace from "./components/places/board-place.component";
 import BoardSchool from "./components/board-school.component";
+import UsePlace from "./components/places/places";
 
 class App extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class App extends Component {
               <img
                 src={logo}
                 alt="SafeSchool"
-                width="190"
+                width="143"
                 height="60"
               />
             </Link>
@@ -144,6 +145,7 @@ class App extends Component {
               <Route exact path="/register" component={Register}/>
               <Route path="/school" component={BoardSchool}/>
               <Route path="/place" component={BoardPlace}/>
+              <Route path="/use-place" component={UsePlace}/>
               <Route path="/exit" component={BoardExit}/>
               <Route path="/admin" component={BoardAdmin}/>
             </Switch>

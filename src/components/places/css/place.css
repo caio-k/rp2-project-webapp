@@ -1,0 +1,159 @@
+.place__container {
+    width: 300px;
+    border: 1px solid var(--cor-words-principal);
+    margin: 10px;
+    border-radius: var(--radius-default);
+    overflow: hidden;
+    background-color: var(--cor-bg-content-1);
+}
+
+.place__header {
+    position: relative;
+}
+
+.place__header h3 {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.place__header, .place__header h3 {
+    background: var(--cor-bg-header-1);
+    display: flex;
+    align-items: center;
+    color: var(--cor-words-principal);
+    min-height: 40px;
+    max-height: 40px;
+    font-size: 1.3rem;
+}
+
+.place__img {
+    max-width: 100%;
+}
+
+.place__counter {
+    display: flex;
+    justify-content: space-around;
+    height: 0;
+    position: relative;
+    top: 45px;
+    color: var(--cor-words-principal);
+}
+
+.place__counter p {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.place__counter p span {
+    border-radius: 100%;
+    width: 50px;
+    min-height: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: inherit;
+    background-color: var(--cor-bg-content-1);
+    color: black;
+}
+
+.place__status {
+    height: var(--line-heigth-content);
+    display: flex;
+    justify-content: center;
+    color: var(--cor-words-principal);
+    font-weight: bold;
+    align-items: flex-end;
+    font-size: 30px;
+}
+
+.place__manager {
+    background: var(--cor-bg-header-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--line-heigth-default);
+    color: var(--cor-words-principal);
+}
+
+.place__manager button {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: none;
+    border: 2px solid var(--cor-words-principal);
+    color: var(--cor-words-principal);
+    font-weight: bold;
+}
+
+.status--crowded {
+    background-color: var(--status--crowded);
+}
+
+.status--crowded::before {
+    content: "Crowded";
+}
+
+.status--almost-full {
+    background-color: var(--status--almost-full);
+}
+
+.status--almost-full::before {
+    content: "Almost Full";
+}
+
+.status--safe {
+    background-color: var(--status--safe);
+    content: "Safe";
+}
+
+.status--safe::before {
+    content: "Safe";
+}
+
+.place_alert {
+    position: absolute;
+    top: 20px;
+    z-index: 100;
+    transition: opacity 0.4s linear;
+}
+
+.alert-appear {
+    opacity: 0;
+}
+
+.alert-appear .alert-appear-active {
+    opacity: 1;
+}
+
+.alert-exit {
+    opacity: 1;
+    transition: opacity 0.4s linear;
+}
+
+.alert-exit-done {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+}
+
+.alert-position {
+    position: fixed;
+}
+
+.blink-bg {
+    animation: blinkingBackground 2s infinite;
+}
+
+@keyframes blinkingBackground {
+    0% {
+        background-color: #b2e4e8;
+    }
+    50% {
+        background-color: #65c8d0;
+    }
+}
