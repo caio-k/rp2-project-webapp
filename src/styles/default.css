@@ -1,15 +1,15 @@
 /*RESET*/
-p{
+p {
     margin: 0;
 }
 
-button:focus{
+button:focus {
     outline: none;
     box-shadow: none;
 }
 
 /*VARIABLES*/
-body{
+body {
     --cor-bg-principal: teal;
     --cor-words-principal: white;
     --cor-words-2: #367a68;
@@ -18,9 +18,10 @@ body{
     --status--safe: #91E981;
     --line-heigth-default: 50px;
     --line-heigth-content: 130px;
-    --cor-bg-header-1:#00d0b0;
+    --cor-bg-header-1: #00d0b0;
     --cor-bg-content-1: #ecf0f1;
-    --cor-bg-header-2:#3993b3;
+    --cor-bg-header-2: #3993b3;
     --cor-bg-content-2: #b1e4e8;
     --radius-default: 13px;
+    --pf-color: #00bda0;
 }

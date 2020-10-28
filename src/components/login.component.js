@@ -1,27 +1,14 @@
 import React, {Component} from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
-
 import "../styles/public_form.css"
-import profilePic from "../assets/profile_pic.svg"
-
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+import PopupMessage from "./utils/popup-message.component";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.goToRegister = this.goToRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
@@ -29,7 +16,8 @@ export default class Login extends Component {
       username: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
+      alertStatus: false
     };
   }
 
@@ -45,6 +33,11 @@ export default class Login extends Component {
     });
   }
 
+  goToRegister(e) {
+    e.preventDefault();
+    this.props.history.push("/register");
+  }
+
   handleLogin(e) {
     e.preventDefault();
 
@@ -53,9 +46,7 @@ export default class Login extends Component {
       loading: true
     });
 
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
+    if (this.state.username && this.state.password) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
           const user = AuthService.getCurrentUser();
@@ -74,86 +65,80 @@ export default class Login extends Component {
             error.message ||
             error.toString();
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
+          this.popup(resMessage);
         }
       );
     } else {
-      this.setState({
-        loading: false
-      });
+      this.popup("All fields are required!");
     }
+  }
+
+  popup(message) {
+    this.setState({
+      message: message,
+      alertStatus: true,
+      loading: false
+    });
+
+    setTimeout(() => this.setState({
+      alertStatus: false
+    }), 6000);
   }
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="public-form-card public-form-container">
-          <img
-            src={profilePic}
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="container-form">
 
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username" className="public-form-label">Username</label>
-              <Input
+        {this.state.alertStatus && (
+          <PopupMessage message={this.state.message} success={false}/>
+        )}
+
+        <div className="content-form">
+          <div className="attraction-column">
+            <h2 className="title-form title-form-primary">hello!</h2>
+            <p className="description-form">Enter your personal details</p>
+            <p className="description-form">and start journey with us</p>
+            <button
+              type="button"
+              className="pf-button pf-button-primary"
+              onClick={this.goToRegister}
+              disabled={this.state.loading}>
+              sign up
+            </button>
+          </div>
+
+          <div className="info-column">
+            <h2 className="title-form title-form-secondary">sign in to SafeSchool</h2>
+            <form className="pf-form">
+              <input
                 type="text"
-                className="form-control"
-                name="username"
+                placeholder="Username"
                 value={this.state.username}
                 autoComplete="off"
                 onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password" className="public-form-label">Password</label>
-              <Input
+                required/>
+              <input
                 type="password"
-                className="form-control"
-                name="password"
+                placeholder="Password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
+                required/>
               <button
-                className="public-form-button btn btn-block"
-                disabled={this.state.loading}
-              >
+                type="submit"
+                className="pf-button pf-button-secondary"
+                onClick={this.handleLogin}
+                disabled={this.state.loading}>
+
                 {this.state.loading && (
                   <span className="spinner-border spinner-border-sm"/>
                 )}
-                <span>Login</span>
-              </button>
-            </div>
 
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{display: "none"}}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
+                {!this.state.loading && (
+                  <span>sign in</span>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );

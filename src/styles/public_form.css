@@ -1,3 +1,4 @@
+/*remove*/
 .public-form-container.public-form-card {
     max-width: 350px !important;
     padding: 40px 40px;
@@ -48,4 +49,120 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
+}
+
+/*end remove*/
+
+.container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.content-form {
+    display: flex;
+    border-radius: 15px;
+    width: 960px;
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--pf-color);
+    min-height: 300px;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 300px;
+    background-color: #F3F3F3;
+}
+
+.attraction-column {
+    text-align: center;
+    width: 40%;
+}
+
+.title-form {
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.title-form-primary {
+    color: #fff;
+}
+
+.title-form-secondary {
+    color: var(--pf-color);
+}
+
+.description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+    color: #fff;
+}
+
+.pf-button {
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border-width: 0;
+    margin-top: 1rem;
+    transition: background-color .5s;
+}
+
+.pf-button-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+}
+
+.pf-button-primary:hover {
+    background-color: #fff;
+    color: var(--pf-color);
+}
+
+.pf-button-secondary {
+    background-color: var(--pf-color);
+    border: 1px solid var(--pf-color);
+}
+
+.pf-button-secondary:hover {
+    background-color: #fff;
+    border: 1px solid var(--pf-color);
+    color: var(--pf-color);
+}
+
+.pf-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.pf-form input {
+    height: 45px;
+    border: none;
+    margin: 8px;
+    padding: 10px;
+}
+
+@media screen and (max-width: 770px) {
+    .info-column {
+        width: 100%;
+    }
+
+    .attraction-column {
+        display: none;
+    }
 }
