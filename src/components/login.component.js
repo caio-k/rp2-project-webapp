@@ -115,14 +115,12 @@ export default class Login extends Component {
                 placeholder="Username"
                 value={this.state.username}
                 autoComplete="off"
-                onChange={this.onChangeUsername}
-                required/>
+                onChange={this.onChangeUsername}/>
               <input
                 type="password"
                 placeholder="Password"
                 value={this.state.password}
-                onChange={this.onChangePassword}
-                required/>
+                onChange={this.onChangePassword}/>
               <button
                 type="submit"
                 className="pf-button pf-button-secondary"
