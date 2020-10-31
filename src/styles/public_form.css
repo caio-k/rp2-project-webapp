@@ -1,58 +1,3 @@
-/*remove*/
-.public-form-container.public-form-card {
-    max-width: 350px !important;
-    padding: 40px 40px;
-}
-
-.public-form-card {
-    background-color: #91ffdb;
-    padding: 20px 25px 30px;
-    margin: 50px auto 25px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.profile-img-card {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
-
-.public-form-label {
-    color: #00473C;
-    margin-left: 5px;
-    font-weight: 600;
-    display: block;
-    margin-top: 1px;
-}
-
-.public-form-button {
-    background-color: #008e78;
-    color: #FFFFFF;
-    font-weight: 600;
-}
-
-.mr-54 {
-    margin-right: 54px;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-/*end remove*/
-
 .container-form {
     display: flex;
     justify-content: center;
@@ -64,7 +9,7 @@ input:-webkit-autofill:active {
     display: flex;
     border-radius: 15px;
     width: 960px;
-    height: 50%;
+    height: 100%;
     justify-content: space-between;
     align-items: center;
     background-color: var(--pf-color);
@@ -78,8 +23,9 @@ input:-webkit-autofill:active {
     align-items: center;
     justify-content: center;
     width: 60%;
-    height: 300px;
+    height: 400px;
     background-color: #F3F3F3;
+    padding-bottom: 10px;
 }
 
 .attraction-column {
@@ -163,9 +109,57 @@ input:-webkit-autofill:active {
     border-radius: 5px;
 }
 
+.input-roles {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    margin-left: 9px;
+}
+
+.input-roles input[type="radio"] {
+    display: none;
+}
+
+.input-roles label {
+    color: var(--pf-color);
+    font-size: 15px;
+    border: 2px solid var(--pf-color);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color .3s;
+    height: 50px;
+}
+
+.input-roles label:before {
+    content: '';
+    height: 15px;
+    width: 15px;
+    border: 3px solid var(--pf-color);
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.input-roles input[type="radio"]:checked + label {
+    background-color: var(--pf-color);
+    color: white;
+}
+
+.input-roles input[type="radio"]:checked + label:before {
+    height: 16px;
+    width: 16px;
+    border: 5px solid white;
+    background-color: var(--pf-color);
+}
+
 @media screen and (max-width: 770px) {
     .info-column {
         width: 100%;
+        order: 2;
+        margin: 10px 0;
+        height: 350px;
     }
 
     .attraction-column {
@@ -175,6 +169,7 @@ input:-webkit-autofill:active {
         padding: 10px 0 10px 0;
         background-color: var(--pf-color);
         border-radius: 0 0 40% 40%;
+        order: 1;
     }
 
     .content-form {

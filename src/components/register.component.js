@@ -1,58 +1,15 @@
 import React, {Component} from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
 
 import AuthService from "../services/auth.service";
-
+import PopupMessage from "./utils/popup-message.component";
 import "../styles/public_form.css"
-import profilePic from "../assets/profile_pic.svg"
-
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
-
-const email = value => {
-  if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vusername = value => {
-  if (value.length < 3 || value.length > 20) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
-      </div>
-    );
-  }
-};
-
-const vpassword = value => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -63,8 +20,10 @@ export default class Register extends Component {
       email: "",
       role: "user",
       password: "",
-      successful: false,
-      message: ""
+      loading: false,
+      message: "",
+      alertStatus: false,
+      successful: false
     };
   }
 
@@ -92,17 +51,20 @@ export default class Register extends Component {
     })
   }
 
+  goToLogin(e) {
+    e.preventDefault();
+    this.props.history.push("/login");
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
     this.setState({
       message: "",
-      successful: false
+      loading: true
     });
 
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
+    if (this.allInputsCorrect()) {
       const role = ["user"];
       if (this.state.role === "admin") role.push("admin");
 
@@ -113,9 +75,12 @@ export default class Register extends Component {
         this.state.password
       ).then(
         response => {
+          this.popup(response.data.message, true);
           this.setState({
-            message: response.data.message,
-            successful: true
+            username: "",
+            email: "",
+            role: "user",
+            password: ""
           });
         },
         error => {
@@ -126,120 +91,108 @@ export default class Register extends Component {
             error.message ||
             error.toString();
 
-          this.setState({
-            successful: false,
-            message: resMessage
-          });
+          this.popup(resMessage, false);
         }
       );
     }
   }
 
+  allInputsCorrect() {
+    if (!(this.state.username && this.state.password && this.state.email && this.state.role)) {
+      this.popup("All fields are required!", false);
+      return false;
+    } else if (this.state.username.length < 3 || this.state.username.length > 20) {
+      this.popup("The username must be between 3 and 20 characters.", false);
+      return false;
+    } else if (this.state.password.length < 6 || this.state.password.length > 40) {
+      this.popup("The password must be between 6 and 40 characters.", false);
+      return false;
+    } else if (!isEmail(this.state.email)) {
+      this.popup("This is not a valid email.", false);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  popup(message, successful) {
+    this.setState({
+      message: message,
+      alertStatus: true,
+      loading: false,
+      successful: successful
+    });
+
+    setTimeout(() => this.setState({
+      alertStatus: false
+    }), 6000);
+  }
+
   render() {
     return (
-      <div className="col-md-12">
-        <div className="public-form-card public-form-container">
-          <img
-            src={profilePic}
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="container-form">
 
-          <Form
-            onSubmit={this.handleRegister}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            {!this.state.successful && (
-              <div>
-                <div className="form-group">
-                  <label htmlFor="username" className="public-form-label">Username</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    autoComplete="off"
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                  />
-                </div>
+        {this.state.alertStatus && (
+          <PopupMessage message={this.state.message} success={this.state.successful}/>
+        )}
 
-                <div className="form-group">
-                  <label htmlFor="email" className="public-form-label">Email</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    value={this.state.email}
-                    autoComplete="off"
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <p className="pb-0 col-form-label public-form-label">Role</p>
-                  <div className="mr-54 form-check-inline">
-                    <label className="form-check-label">
-                      <input type="radio"
-                             className="form-check-input"
-                             value="user"
-                             checked={this.state.role === "user"}
-                             onChange={this.onChangeRole}/>Teacher
-                    </label>
-                  </div>
-                  <div className="form-check-inline">
-                    <label className="form-check-label">
-                      <input type="radio"
-                             className="form-check-input"
-                             value="admin"
-                             checked={this.state.role === "admin"}
-                             onChange={this.onChangeRole}/>School principal
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="password" className="public-form-label">Password</label>
-                  <Input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <button className="public-form-button btn btn-block">Sign Up</button>
-                </div>
+        <div className="content-form">
+          <div className="info-column">
+            <h2 className="title-form title-form-secondary">create account</h2>
+            <form className="pf-form">
+              <input
+                type="text"
+                placeholder="Username"
+                value={this.state.username}
+                autoComplete="off"
+                onChange={this.onChangeUsername}/>
+              <input
+                type="text"
+                placeholder="Email"
+                value={this.state.email}
+                autoComplete="off"
+                onChange={this.onChangeEmail}/>
+              <input
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onChangePassword}/>
+              <div className="input-roles form-check-inline">
+                <input type="radio" value="user" id="user-role" checked={this.state.role === "user"}
+                       onChange={this.onChangeRole} className="form-check-input"/>
+                <label htmlFor="user-role">Teacher</label>
+                <input type="radio" value="admin" id="admin-role" checked={this.state.role === "admin"}
+                       onChange={this.onChangeRole} className="form-check-input"/>
+                <label htmlFor="admin-role">School Principal</label>
               </div>
-            )}
+              <button
+                type="submit"
+                className="pf-button pf-button-secondary"
+                onClick={this.handleRegister}
+                disabled={this.state.loading}>
 
-            {this.state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    this.state.successful
-                      ? "alert alert-success"
-                      : "alert alert-danger"
-                  }
-                  role="alert"
-                >
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{display: "none"}}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
+                {this.state.loading && (
+                  <span className="spinner-border spinner-border-sm"/>
+                )}
+
+                {!this.state.loading && (
+                  <span>sign up</span>
+                )}
+              </button>
+            </form>
+          </div>
+          <div className="attraction-column">
+            <h2 className="title-form title-form-primary">welcome back!</h2>
+            <p className="description-form">To keep connected with us</p>
+            <p className="description-form">please login with your personal info</p>
+            <button
+              type="button"
+              className="pf-button pf-button-primary"
+              onClick={this.goToLogin}
+              disabled={this.state.loading}>
+              sign in
+            </button>
+          </div>
         </div>
       </div>
     );
