@@ -157,58 +157,78 @@ export default class Places extends Component {
     this.setState({renderPlaces});
   }
 
+  getCategoryByType(type) {
+    switch (type) {
+      case 'MEN_BATHROOM':
+        return 'Men\'s Bathroom';
+      case 'WOMEN_BATHROOM':
+        return 'Ladies Bathroom';
+      case 'YARD':
+        return 'Courtyard';
+      case 'DRINKING_FOUNTAIN':
+        return 'Drinking Fountain';
+      case 'CUSTOM':
+        return 'Custom';
+      case 'FAVORITE':
+        return 'Favorites';
+    }
+  }
+
   render() {
     return (
-      <div className="container">
-
-        {(this.state.loading1 || this.state.loading2) && (
-          <Spinner/>
-        )}
-
-        {!(this.state.loading1 || this.state.loading2) && (
-          <>
-            <div className="place_board_header">
-              <p>{this.props.location.state.school.name}</p>
-              <div className="custom-tooltip" data-tooltip="Refresh">
-                <img
-                  src={Refresh}
-                  alt="Refresh"
-                  className={this.state.refreshing ? "spin" : ""}
-                  onClick={() => this.refreshAllUses()}
-                />
-              </div>
-            </div>
-            {this.state.renderPlaces.length > 0 && (
-              <div className="places_cards">
-                {this.state.renderPlaces.map((item) => (
-                  <PlaceComponent
-                    key={item.placeId}
-                    id={item.placeId}
-                    name={item.name}
-                    type={item.type}
-                    max={item.maxPeople}
-                    limit_time={item.limitTimeSeconds}
-                    favorite={item.favorite}
-                    school={this.props.school}
-                    uses={this.getAllUsesByPlaceId(item.placeId)}
-                    onFavorite={() => this.favoritePlaces(item.placeId)}
-                    onRef={ref => (item.ref = ref)}
-                  />
-                ))}
-              </div>
-            )}
-
-            {this.state.renderPlaces.length === 0 && (
-              <div className="board">
-                <div className="board-header">
-                  <span>Places</span>
+      <>
+        <div>
+          {(this.state.loading1 || this.state.loading2) && (
+            <Spinner/>
+          )}
+        </div>
+        <div className="place__box">
+          {!(this.state.loading1 || this.state.loading2) && (
+            <div>
+              <div className="place_board_header">
+                <div>
+                  <p>{this.props.location.state.school.name}</p>
+                  <p>{this.getCategoryByType(this.props.location.state.type)}</p>
                 </div>
-                <span className="message">There are no places registered for this category yet.</span>
+                <div className="custom-tooltip" data-tooltip="Refresh">
+                  <img
+                    src={Refresh}
+                    alt="Refresh"
+                    className={this.state.refreshing ? "spin" : ""}
+                    onClick={() => this.refreshAllUses()}
+                  />
+                </div>
               </div>
-            )}
-          </>
-        )}
-      </div>
+              <div style={{height: "1px", width: "100%", backgroundColor: "#d1d1d1"}}/>
+              {this.state.renderPlaces.length > 0 && (
+                <div className="places_cards">
+                  {this.state.renderPlaces.map((item) => (
+                    <PlaceComponent
+                      key={item.placeId}
+                      id={item.placeId}
+                      name={item.name}
+                      type={item.type}
+                      max={item.maxPeople}
+                      limit_time={item.limitTimeSeconds}
+                      favorite={item.favorite}
+                      school={this.props.school}
+                      uses={this.getAllUsesByPlaceId(item.placeId)}
+                      onFavorite={() => this.favoritePlaces(item.placeId)}
+                      onRef={ref => (item.ref = ref)}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {this.state.renderPlaces.length === 0 && (
+                <div className="empty-category">
+                  <span>There are no places registered for this category yet.</span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 }
