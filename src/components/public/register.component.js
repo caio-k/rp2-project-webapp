@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {isEmail} from "validator";
 
-import AuthService from "../services/auth.service";
-import PopupMessage from "./utils/popup-message.component";
-import "../styles/public_form.css"
+import AuthService from "../../services/auth.service";
+import PopupMessage from "../utils/popup-message.component";
+import "./css/public_form.css"
 
 export default class Register extends Component {
   constructor(props) {

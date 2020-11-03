@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import AuthService from "../services/auth.service";
-import "../styles/public_form.css"
-import PopupMessage from "./utils/popup-message.component";
+import AuthService from "../../services/auth.service";
+import "./css/public_form.css"
+import PopupMessage from "../utils/popup-message.component";
 
 export default class Login extends Component {
   constructor(props) {
