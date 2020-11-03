@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -20,12 +20,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
 
     this.state = {
       showAdminBoard: false,
-      currentUser: undefined,
-      menu: false
+      currentUser: undefined
     };
   }
 
@@ -40,103 +38,63 @@ class App extends Component {
     }
   }
 
-  toggleMenu() {
-    this.setState({menu: !this.state.menu})
-  }
-
   logOut() {
     AuthService.logout();
   }
 
   render() {
     const {currentUser, showAdminBoard} = this.state;
-    const show = (this.state.menu) ? "show" : "";
 
     return (
       <Router>
         <div>
-          <nav className="header navbar navbar-expand-lg navbar-light">
-            <Link to={"/"} className="navbar-brand">
-              <img
-                src={logo}
-                alt="SafeSchool"
-                width="143"
-                height="60"
-              />
-            </Link>
-            <button className="navbar-toggler" type="button" onClick={this.toggleMenu}>
-              <span className="navbar-toggler-icon"/>
-            </button>
+          <div className="site-header">
+            <img
+              src={logo}
+              alt="SafeSchool"
+              width="143"
+              height="60"
+              className="logo"
+            />
+            <input type="checkbox" id="chk"/>
+            <label htmlFor="chk" className="show-menu-btn">
+              ...
+            </label>
 
-            <div className={"collapse navbar-collapse " + show}>
-              <div className="navbar-nav mr-auto">
+            <ul className="menu">
+              {!currentUser && (
+                <a href="/home">Home</a>
+              )}
 
-                {!currentUser && (
-                  <li className="nav-item">
-                    <Link to={"/home"} className="nav-link">
-                      Home
-                    </Link>
-                  </li>
-                )}
+              {showAdminBoard && (
+                <a href="/admin">Management</a>
+              )}
 
-                {showAdminBoard && (
-                  <li className="nav-item">
-                    <Link to={"/admin"} className="nav-link">
-                      Management
-                    </Link>
-                  </li>
-                )}
-
-                {currentUser && !showAdminBoard && (
-                  <li className="nav-item">
-                    <Link to={"/school"} className="nav-link">
-                      Schools
-                    </Link>
-                  </li>
-                )}
-
-                {currentUser && (
-                  <li className="nav-item">
-                    <Link to={"/place"} className="nav-link">
-                      Places
-                    </Link>
-                  </li>
-                )}
-
-                {currentUser && (
-                  <li className="nav-item">
-                    <Link to={"/exit"} className="nav-link">
-                      Exits
-                    </Link>
-                  </li>
-                )}
-              </div>
+              {currentUser && !showAdminBoard && (
+                <a href="/school">Schools</a>
+              )}
 
               {currentUser ? (
-                <div className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <a href="/login" className="nav-link" onClick={this.logOut}>
-                      LogOut
-                    </a>
-                  </li>
-                </div>
+                <>
+                  <a href="/place">Places</a>
+                  <a href="/exit">Exits</a>
+                  <a href="/login" onClick={this.logOut}>LogOut</a>
+                  <a href="/" className="current-user-link">
+                    <button>{currentUser.username}</button>
+                  </a>
+                </>
               ) : (
-                <div className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <Link to={"/login"} className="nav-link">
-                      Login
-                    </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link to={"/register"} className="nav-link">
-                      Sign Up
-                    </Link>
-                  </li>
-                </div>
+                <>
+                  <a href="/login">Sign In</a>
+                  <a href="/register">Sign Up</a>
+                </>
               )}
-            </div>
-          </nav>
+
+              <label htmlFor="chk" className="hide-menu-btn">
+                X
+              </label>
+            </ul>
+          </div>
 
           <div className="container mt-3">
             <Switch>
