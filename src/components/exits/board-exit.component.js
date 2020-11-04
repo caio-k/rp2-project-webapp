@@ -173,7 +173,7 @@ export default class BoardExit extends Component {
             {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
               <div className="exit-log-board">
                 <p>{this.state.exitForExitLog.exitName}</p>
-                <div className="table-overflow logs">
+                <div className="table-overflow logs tb__log">
                   <table className="table table-sm table-hover">
                     <tbody>
                     {this.state.exitLogs.map(this.renderExitLog)}

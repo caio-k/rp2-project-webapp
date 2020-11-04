@@ -1,8 +1,11 @@
 .exit-board {
-    color: #FFFFFF;
+    color: white;
     background-color: #1a7fa7;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    background: var(--cor-bg-header-1);
+    font-weight: bold;
+    border-radius: 10px;
 }
 .exit-board > p {
     font-size: 20px;
@@ -12,7 +15,6 @@
 .exit-board > div {
     min-height: 200px;
     max-height: 200px;
-    background-color: #b2e4e8;
 }
 .exit-board td {
     cursor: pointer;
@@ -37,6 +39,8 @@
 .exit-log-board > p {
     font-size: 20px;
     line-height: 40px;
+    background: var(--cor-bg-header-1);
+    font-weight: bold;
 }
 .logs {
     min-height: 152px;
@@ -57,4 +61,24 @@
     border-radius: 5px;
     border: 1px solid #008e78;
     background-color: #00bda0;
+}
+
+.table-overflow{
+    background: var(--cor-bg-header-1);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.table{
+    background: var(--cor-bg-content-1);
+    border-radius: 10px;
+}
+
+.table thead th{
+    border: none;
+}
+
+.tb__log{
+    background: var(--cor-bg-content-1);
+    border-radius: 0;
 }
