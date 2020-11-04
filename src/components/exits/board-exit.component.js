@@ -150,7 +150,7 @@ export default class BoardExit extends Component {
           <>
             <div className="exit-board">
               <p>{this.state.school.name}</p>
-              <div className="table-overflow">
+              <div className="table-overflow tb__log">
                 <table className="table table-sm table-hover">
                   <thead>
                   <tr>

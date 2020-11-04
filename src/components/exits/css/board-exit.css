@@ -63,7 +63,7 @@
     background-color: #00bda0;
 }
 
-.table-overflow{
+.tb__log{
     background: var(--cor-bg-header-1);
     padding: 10px;
     border-radius: 10px;
