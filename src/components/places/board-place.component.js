@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import SchoolService from '../../services/school.service'
 import ChoosePlace from './choose';
+import MessageContainer from "../utils/message-container.component";
 import './css/board-place.css'
 
 export default class BoardPlace extends Component {
@@ -24,13 +25,8 @@ export default class BoardPlace extends Component {
     return (
       <>
         {this.state.school === null ?
-          <div className="board">
-            <div className="board-header">
-              <span>Places</span>
-            </div>
-            <span
-              className="message">You have not yet selected a school. Go to the "Schools" menu and select a school.</span>
-          </div>
+          <MessageContainer message="You have not yet selected a school. Go to the Schools menu and select a school."
+                            header="Warning!"/>
           :
           <div className="board__place__container">
             <ChoosePlace school={this.state.school} history={this.props.history}/>
