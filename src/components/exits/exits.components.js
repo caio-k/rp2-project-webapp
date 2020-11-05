@@ -150,7 +150,7 @@ export default class Exits extends Component {
                 <table className="table table-sm table-hover">
                   <thead>
                   <tr>
-                    <td scope="col" style={{fontWeight: "500"}}>Choose an exit</td>
+                    <td style={{fontWeight: "500"}}>Choose an exit</td>
                   </tr>
                   </thead>
                   <tbody>
