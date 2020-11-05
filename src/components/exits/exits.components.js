@@ -31,7 +31,6 @@ export default class Exits extends Component {
       response => {
         this.setState({
           exits: response.data,
-          school: this.state.school,
           loading: false
         });
       },
@@ -151,7 +150,7 @@ export default class Exits extends Component {
                 <table className="table table-sm table-hover">
                   <thead>
                   <tr>
-                    <th scope="col">Choose an exit</th>
+                    <td scope="col" style={{fontWeight: "500"}}>Choose an exit</td>
                   </tr>
                   </thead>
                   <tbody>

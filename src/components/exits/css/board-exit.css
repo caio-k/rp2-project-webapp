@@ -1,52 +1,57 @@
 .exit-board {
     color: white;
-    background-color: #1a7fa7;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     background: var(--cor-bg-header-1);
-    font-weight: bold;
     border-radius: 10px;
+    overflow: hidden;
 }
+
 .exit-board > p {
     font-size: 20px;
     line-height: 40px;
     text-align: center;
+    font-weight: 500;
 }
+
 .exit-board > div {
     min-height: 200px;
     max-height: 200px;
 }
+
 .exit-board td {
     cursor: pointer;
     padding: 5px;
 }
+
 .exit-board td > div {
     border-radius: 5px;
     background-color: rgb(242, 252, 253);
 }
+
 .exit-board td > div > span {
     padding: 5px;
+    font-size: 16px;
 }
 
 .exit-log-board {
     color: #FFFFFF;
     text-align: center;
-    background-color: #1a7fa7;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
     margin-top: 20px;
 }
+
 .exit-log-board > p {
     font-size: 20px;
     line-height: 40px;
     background: var(--cor-bg-header-1);
-    font-weight: bold;
+    font-weight: 500;
 }
+
 .logs {
     min-height: 152px;
     max-height: 152px;
-    background-color: #b2e4e8;
 }
+
 .release-btn {
     padding: 5px;
     background-color: #b2e4e8;
@@ -54,6 +59,7 @@
     display: flex;
     justify-content: center
 }
+
 .release-btn > button {
     color: #FFFFFF;
     margin: 5px;
@@ -63,22 +69,16 @@
     background-color: #00bda0;
 }
 
-.tb__log{
-    background: var(--cor-bg-header-1);
-    padding: 10px;
+.table {
     border-radius: 10px;
 }
 
-.table{
-    background: var(--cor-bg-content-1);
-    border-radius: 10px;
-}
-
-.table thead th{
+.table thead th {
     border: none;
 }
 
-.tb__log{
+.tb__log {
     background: var(--cor-bg-content-1);
+    padding: 10px;
     border-radius: 0;
 }
