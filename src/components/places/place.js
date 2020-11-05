@@ -201,7 +201,7 @@ export default class PlaceComponent extends Component {
                   type="number"
                   min="1"
                   autoComplete="off"
-                  className="form-control"
+                  className="form-control manager__input"
                   style={{width: "65px"}}
                   value={this.state.numberOfPeople}
                   onChange={this.onChangeNumberOfPeople}

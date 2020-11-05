@@ -1,3 +1,8 @@
+.exit__container{
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .exit-board {
     color: white;
     background-color: #1a7fa7;
@@ -41,6 +46,8 @@
     line-height: 40px;
     background: var(--cor-bg-header-1);
     font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .logs {
     min-height: 152px;
@@ -50,7 +57,7 @@
 .release-btn {
     padding: 5px;
     background-color: #b2e4e8;
-    border-top: 2px solid #0c5e8c;
+    border-top: 2px solid var(--cor-bg-header-1);
     display: flex;
     justify-content: center
 }
@@ -81,4 +88,8 @@
 .tb__log{
     background: var(--cor-bg-content-1);
     border-radius: 0;
+}
+
+.release-btn{
+    background: var(--cor-bg-content-1);
 }

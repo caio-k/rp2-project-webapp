@@ -148,6 +148,9 @@ export default class BoardExit extends Component {
 
         {!this.state.loading && (
           <>
+          <div className="exit__container">
+
+          
             <div className="exit-board">
               <p>{this.state.school.name}</p>
               <div className="table-overflow tb__log">
@@ -185,6 +188,8 @@ export default class BoardExit extends Component {
                 </div>
               </div>
             )}
+
+          </div>
           </>
         )}
       </div>
