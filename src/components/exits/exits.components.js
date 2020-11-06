@@ -31,7 +31,6 @@ export default class Exits extends Component {
       response => {
         this.setState({
           exits: response.data,
-          school: this.state.school,
           loading: false
         });
       },
@@ -155,19 +154,19 @@ export default class Exits extends Component {
                       <th scope="col">Choose an exit</th>
                     </tr>
                     </thead>
-                    <tbody>
-                      {this.state.exits.map(this.renderRow)}
-                    </tbody>
-                  </table>
-                </div>
+                  <tbody>
+                  {this.state.exits.map(this.renderRow)}
+                  </tbody>
+                </table>
               </div>
+            </div>
 
-              {this.state.loadingLogs && (
-                <div style={{marginTop: "20px"}}>
-                  <Spinner/>
-                </div>
-              )}
-
+            {this.state.loadingLogs && (
+              <div style={{marginTop: "20px"}}>
+                <Spinner/>
+              </div>
+            )}
+            
               {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
                 <div className="exit-log-board">
                   <p>{this.state.exitForExitLog.exitName}</p>

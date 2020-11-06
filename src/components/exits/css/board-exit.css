@@ -29,26 +29,35 @@
 
 .tb__content{
     background: var(--cor-bg-header-1);
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 .exit-board > p {
     font-size: 20px;
     line-height: 40px;
     text-align: center;
+    font-weight: 500;
 }
+
 .exit-board > div {
     min-height: 200px;
     max-height: 200px;
 }
+
 .exit-board td {
     cursor: pointer;
     padding: 5px;
 }
+
 .exit-board td > div {
     border-radius: 5px;
     background-color: rgb(242, 252, 253);
 }
+
 .exit-board td > div > span {
     padding: 5px;
+    font-size: 16px;
 }
 
 .exit-log-board {
@@ -71,12 +80,14 @@
     background: var(--cor-bg-content-4);
     color: var(--cor-bg-header-1);
 }
+
 .logs {
     min-height: 152px;
     max-height: 152px;
     background-color: #b2e4e8;
     background: var(--cor-bg-content-4);
 }
+
 .release-btn {
     padding: 5px;
     background-color: #b2e4e8;
@@ -84,6 +95,7 @@
     display: flex;
     justify-content: center
 }
+
 .release-btn > button {
     color: #FFFFFF;
     margin: 5px;
@@ -116,8 +128,4 @@
 .release-btn{
     background: var(--cor-bg-content-1);
     background: var(--cor-bg-content-4);
-}
-
-@media screen and (max-width: 500px) {
-
 }
