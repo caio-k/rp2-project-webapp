@@ -142,49 +142,62 @@ export default class Exits extends Component {
           <PopupMessage message={this.state.message} success={this.state.popupSuccess}/>
         )}
 
-        <div className="exit__container">
-          {!this.state.loading && (
-            <>
-              <div className="exit-board">
-                <p>{this.state.school.name}</p>
-                <div className="table-overflow tb__content">
-                  <table className="table table-sm table-hover tb__exits">
-                    <thead>
-                    <tr>
-                      <th scope="col">Choose an exit</th>
-                    </tr>
-                    </thead>
-                  <tbody>
-                  {this.state.exits.map(this.renderRow)}
-                  </tbody>
-                </table>
-              </div>
-            </div>
 
-            {this.state.loadingLogs && (
-              <div style={{marginTop: "20px"}}>
-                <Spinner/>
-              </div>
-            )}
-            
-              {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
-                <div className="exit-log-board">
-                  <p>{this.state.exitForExitLog.exitName}</p>
-                  <div className="table-overflow logs tb__log">
+        {!this.state.loading && (
+          <div className="exit__container">
+            <div className="exit__box">
+              <div className="left-side">
+                <div className="exit-board">
+                  <p>{this.state.school.name}</p>
+                  <div className="table-overflow">
                     <table className="table table-sm table-hover">
+                      <thead>
+                      <tr>
+                        <th scope="col">Choose an exit</th>
+                      </tr>
+                      </thead>
                       <tbody>
-                      {this.state.exitLogs.map(this.renderExitLog)}
+                      {this.state.exits.map(this.renderRow)}
                       </tbody>
                     </table>
                   </div>
-                  <div className="release-btn">
-                    <button onClick={() => this.releaseStudents()}>Release Students</button>
-                  </div>
                 </div>
-              )}
-            </>
-          )}
-        </div>
+              </div>
+
+              <div className="right-side">
+                <div className="exit__box__logs">
+                  {this.state.loadingLogs && (
+                    <div style={{marginTop: "20px"}}>
+                      <Spinner/>
+                    </div>
+                  )}
+
+                  {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
+                    <div className="logs__box">
+                      <p>{this.state.exitForExitLog.exitName}</p>
+                      <div className="table-overflow tb__log">
+                        <table className="table table-sm table-hover">
+                          <tbody>
+                          {this.state.exitLogs.map(this.renderExitLog)}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="release-btn">
+                        <button onClick={() => this.releaseStudents()}>Release Students</button>
+                      </div>
+                    </div>
+                  )}
+
+                  {!this.state.loadingLogs && this.state.exitForExitLog.exitName === undefined && (
+                    <div className="not-selected">
+                      <p>No exit selected!</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

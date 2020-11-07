@@ -1,36 +1,40 @@
-.exit__container{
+.exit__container {
     padding: 20px;
     border-radius: 2px;
-    display: flex;
-    flex-flow: wrap;
-    align-items: center;
-    justify-content: center;
-    background: var(--cor-bg-content-5);
+    background-color: #b2e4e8;
 }
 
-.tb__exits{
-    margin: 10px auto;
-    max-width: 90%;
+.table {
+    background: var(--cor-bg-content-1);
+    border-radius: 10px;
 }
 
-.tb__exits tbody tr td div{
-    border: 1px solid white;
+.table thead th {
     border: none;
+}
+
+.left-side {
+    width: 50%;
+}
+
+.right-side {
+    width: 50%;
+}
+
+.exit__box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: red;
 }
 
 .exit-board {
     color: white;
     background-color: #1a7fa7;
     background: var(--cor-bg-header-1);
-    font-weight: bold;
-    width: 400px;
-    border: 3px solid var(--cor-bg-header-1);
-}
-
-.tb__content{
-    background: var(--cor-bg-header-1);
-    border-radius: 10px;
-    overflow: hidden;
+    font-weight: 500;
+    padding: 5px;
 }
 
 .exit-board > p {
@@ -60,40 +64,38 @@
     font-size: 16px;
 }
 
-.exit-log-board {
-    color: #FFFFFF;
-    text-align: center;
-    background-color: #1a7fa7;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 400px;
-    background: var(--cor-bg-content-4);
+.exit__box__logs {
+    height: 100%;
+    background-color: white;
     border: 3px solid var(--cor-bg-header-1);
-    border-radius: 0;
 }
 
-.exit-log-board > p {
+.logs__box > p {
     font-size: 20px;
     line-height: 40px;
-    background: var(--cor-bg-header-1);
     font-weight: bold;
-    background: var(--cor-bg-content-4);
     color: var(--cor-bg-header-1);
+    text-align: center;
 }
 
-.logs {
-    min-height: 152px;
-    max-height: 152px;
-    background-color: #b2e4e8;
+.tb__log {
+    padding: 10px;
+    background: var(--cor-bg-content-4);
+    border-radius: 0;
+    text-align: center;
+    height: 156px;
+}
+
+.tb__log table {
     background: var(--cor-bg-content-4);
 }
 
 .release-btn {
     padding: 5px;
-    background-color: #b2e4e8;
+    background-color: var(--cor-bg-header-1);
     border-top: 2px solid var(--cor-bg-header-1);
     display: flex;
-    justify-content: center
+    justify-content: center;
 }
 
 .release-btn > button {
@@ -102,30 +104,23 @@
     padding: 0 30px;
     border-radius: 5px;
     border: 1px solid #008e78;
-    background-color: #00bda0;
+    background-color: #4cb0c3;
 }
 
-.table{
-    background: var(--cor-bg-content-1);
-    border-radius: 10px;
+.not-selected {
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+    color: var(--cor-bg-header-1);
+    text-align: center;
 }
 
-.table thead th{
-    border: none;
-}
+@media screen and (max-width: 815px) {
+    .exit__box {
+        flex-direction: column;
+    }
 
-.tb__log{
-    padding: 10px;
-    border-radius: 10px;
-    background: var(--cor-bg-content-4);
-    border-radius: 0;
-}
-
-.tb__log table{
-    background: var(--cor-bg-content-4);
-}
-
-.release-btn{
-    background: var(--cor-bg-content-1);
-    background: var(--cor-bg-content-4);
+    .left-side, .right-side {
+        width: 100%;
+    }
 }
