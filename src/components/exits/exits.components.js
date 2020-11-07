@@ -133,7 +133,7 @@ export default class Exits extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         {this.state.loading && (
           <Spinner/>
         )}
@@ -142,58 +142,58 @@ export default class Exits extends Component {
           <PopupMessage message={this.state.message} success={this.state.popupSuccess}/>
         )}
 
-
         {!this.state.loading && (
           <div className="exit__container">
-            <div className="exit__box">
-              <div className="left-side">
-                <div className="exit-board">
-                  <p>{this.state.school.name}</p>
-                  <div className="table-overflow">
-                    <table className="table table-sm table-hover">
-                      <thead>
-                      <tr>
-                        <th scope="col">Choose an exit</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      {this.state.exits.map(this.renderRow)}
-                      </tbody>
-                    </table>
-                  </div>
+            <div className="exit__container__header">
+              <p>{this.state.school.name}</p>
+              <p>Exits</p>
+            </div>
+
+            <div style={{height: "1px", width: "100%", backgroundColor: "#d1d1d1"}}/>
+
+            <div className="exit__container__content">
+              <div className="left-side table-overflow">
+                <div>
+                  <table className="table table-sm table-hover">
+                    <thead>
+                    <tr>
+                      <td style={{fontWeight: "500", border: "none"}}>Choose an exit</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.exits.map(this.renderRow)}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-
               <div className="right-side">
-                <div className="exit__box__logs">
-                  {this.state.loadingLogs && (
-                    <div style={{marginTop: "20px"}}>
-                      <Spinner/>
-                    </div>
-                  )}
+                {this.state.loadingLogs && (
+                  <div style={{marginTop: "20px"}}>
+                    <Spinner/>
+                  </div>
+                )}
 
-                  {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
-                    <div className="logs__box">
-                      <p>{this.state.exitForExitLog.exitName}</p>
-                      <div className="table-overflow tb__log">
-                        <table className="table table-sm table-hover">
-                          <tbody>
-                          {this.state.exitLogs.map(this.renderExitLog)}
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="release-btn">
-                        <button onClick={() => this.releaseStudents()}>Release Students</button>
-                      </div>
+                {!this.state.loadingLogs && this.state.exitForExitLog.exitName !== undefined && (
+                  <div className="logs__box">
+                    <p>{this.state.exitForExitLog.exitName}</p>
+                    <div className="table-overflow tb__log">
+                      <table className="table table-sm table-hover">
+                        <tbody>
+                        {this.state.exitLogs.map(this.renderExitLog)}
+                        </tbody>
+                      </table>
                     </div>
-                  )}
+                    <div className="release-btn">
+                      <button onClick={() => this.releaseStudents()}>Release Students</button>
+                    </div>
+                  </div>
+                )}
 
-                  {!this.state.loadingLogs && this.state.exitForExitLog.exitName === undefined && (
-                    <div className="not-selected">
-                      <p>No exit selected!</p>
-                    </div>
-                  )}
-                </div>
+                {!this.state.loadingLogs && this.state.exitForExitLog.exitName === undefined && (
+                  <div className="not-selected">
+                    <p>No exit selected!</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
