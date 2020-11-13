@@ -20,6 +20,7 @@ export default class Home extends Component {
   }
 
   render() {
+    const {history} = this.props;
     return (
       <div className="home__container">
         <div className=" home__board home__board-1">
@@ -39,11 +40,11 @@ export default class Home extends Component {
 
         <div className=" home__board home__board-4">
             <img src={Img3} alt=""/>
-            <p>Monitorar as saídas</p>
+            <p>Monitorar as saídas e muito mais</p>
         </div>
 
         <div className="home__cadastrar">
-          <button onClick={()=>{}}>Crei já sua conta</button>
+          <button onClick={()=>{history.push("/register")}}>Crei já sua conta</button>
         </div>
       </div>
     );

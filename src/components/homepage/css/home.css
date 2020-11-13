@@ -20,19 +20,25 @@
 .home__board:first-child{
     height: calc(100vh - 100px);
     background: var(--cor-bg-header-2);
+    background-image: linear-gradient(var(--cor-bg-header-2) 70% , var(--cor-bg-header-3));
+}
+
+.home__board h1 {
+    font-family: var(--font-2);
+    font-size: 60px;
 }
 
 .home__board h1+p{
     max-width: 600px;
     margin-top: 50px;
-    font-family: var(--font-1);
+    font-family: var(--font-4);
     font-size: 23px;
 }
 
 .home__board img + p{
     font-size: 30px;
     padding: 10px;
-    font-family: var(--font-1);
+    font-family: var(--font-3);
 }
 
 .home__board + .home__two{
@@ -68,4 +74,20 @@
 
 .home__cadastrar button:hover{
     background: var(--cor-bg-header-2);
+}
+
+@media screen and (max-width: 790px) {
+    .home__board , .home__board + .home__two{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home__board h1 {
+        font-size: 40px;
+    }
+
+    .home__board img {
+        max-width: 270px;
+    }
 }

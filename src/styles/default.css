@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Shadows+Into+Light+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
 
 p{
     margin: 0;
@@ -30,4 +33,7 @@ body{
     --cor-bg-content-3:#b2e4e8;
     --cor-bg-content-4: white;
     --font-1: 'Open Sans Condensed', sans-serif;
+    --font-2: 'Fredericka the Great', cursive;
+    --font-3: 'Shadows Into Light Two', cursive;
+    --font-4:'Cabin Sketch', cursive;
 }
