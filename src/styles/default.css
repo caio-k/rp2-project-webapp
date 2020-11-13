@@ -1,4 +1,5 @@
-/*RESET*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
 p{
     margin: 0;
 }
@@ -8,7 +9,6 @@ button:focus{
     box-shadow: none;
 }
 
-/*VARIABLES*/
 body{
     --cor-bg-principal: teal;
     --cor-words-principal: white;
@@ -29,4 +29,5 @@ body{
     --radius-default: 13px;
     --cor-bg-content-3:#b2e4e8;
     --cor-bg-content-4: white;
+    --font-1: 'Open Sans Condensed', sans-serif;
 }
