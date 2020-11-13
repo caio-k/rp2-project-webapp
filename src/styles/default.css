@@ -22,5 +22,11 @@ body{
     --cor-bg-content-1: #ecf0f1;
     --cor-bg-header-2:#3993b3;
     --cor-bg-content-2: #b1e4e8;
+    --cor-bg-header-3: #008e78;
+    --cor-bg-header-4: #0c5e8c;
+    --cor-bg-header-5: #8b9a96;
+    --cor-bg-content-5: #eeeeee;
     --radius-default: 13px;
+    --cor-bg-content-3:#b2e4e8;
+    --cor-bg-content-4: white;
 }
