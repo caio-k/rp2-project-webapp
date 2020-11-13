@@ -7,8 +7,8 @@ import logo from "./logo-oficial.png"
 
 import AuthService from "./services/auth.service";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
+import Login from "./components/public/login.component";
+import Register from "./components/public/register.component";
 import Home from "./components/homepage/home.component";
 import BoardAdmin from "./components/management/board-admin.component";
 import BoardExit from "./components/exits/board-exit.component";

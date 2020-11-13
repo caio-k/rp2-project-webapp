@@ -3,16 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Shadows+Into+Light+Two&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
 
-p{
+/*RESET*/
+p {
     margin: 0;
 }
 
-button:focus{
+button:focus {
     outline: none;
     box-shadow: none;
 }
 
-body{
+/*VARIABLES*/
+body {
     --cor-bg-principal: teal;
     --cor-words-principal: white;
     --cor-words-2: #367a68;
@@ -21,19 +23,20 @@ body{
     --status--safe: #91E981;
     --line-heigth-default: 50px;
     --line-heigth-content: 130px;
-    --cor-bg-header-1:#00d0b0;
+    --cor-bg-header-1: #00d0b0;
     --cor-bg-content-1: #ecf0f1;
-    --cor-bg-header-2:#3993b3;
+    --cor-bg-header-2: #3993b3;
     --cor-bg-content-2: #b1e4e8;
     --cor-bg-header-3: #008e78;
     --cor-bg-header-4: #0c5e8c;
     --cor-bg-header-5: #8b9a96;
     --cor-bg-content-5: #eeeeee;
     --radius-default: 13px;
-    --cor-bg-content-3:#b2e4e8;
+    --pf-color: #00d0b0;
+    --cor-bg-content-3: #b2e4e8;
     --cor-bg-content-4: white;
     --font-1: 'Open Sans Condensed', sans-serif;
     --font-2: 'Fredericka the Great', cursive;
     --font-3: 'Shadows Into Light Two', cursive;
-    --font-4:'Cabin Sketch', cursive;
+    --font-4: 'Cabin Sketch', cursive;
 }
