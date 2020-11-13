@@ -5,6 +5,7 @@
     border-radius: var(--radius-default);
     overflow: hidden;
     background-color: var(--cor-bg-content-1);
+    border: none;
 }
 
 .place__header {
@@ -89,6 +90,10 @@
     border: 2px solid var(--cor-words-principal);
     color: var(--cor-words-principal);
     font-weight: bold;
+}
+
+.manager__input{
+    text-align: center;
 }
 
 .status--crowded {

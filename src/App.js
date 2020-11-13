@@ -11,7 +11,7 @@ import Login from "./components/public/login.component";
 import Register from "./components/public/register.component";
 import Home from "./components/public/home.component";
 import BoardAdmin from "./components/management/board-admin.component";
-import BoardExit from "./components/board-exit.component";
+import BoardExit from "./components/exits/board-exit.component";
 import BoardPlace from "./components/places/board-place.component";
 import BoardSchool from "./components/board-school.component";
 import UsePlace from "./components/places/places";
