@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import SchoolService from '../../services/school.service'
-import ChoosePlace from './choose';
+import SchoolService from "../../services/school.service"
 import MessageContainer from "../utils/message-container.component";
-import './css/board-place.css'
+import Exits from "./exits.components";
 
-export default class BoardPlace extends Component {
+export default class BoardExit extends Component {
   constructor(props) {
     super(props);
 
@@ -28,9 +27,7 @@ export default class BoardPlace extends Component {
           <MessageContainer message="You have not yet selected a school. Go to the Schools menu and select a school."
                             header="Warning!"/>
           :
-          <div className="board__place__container">
-            <ChoosePlace school={this.state.school} history={this.props.history}/>
-          </div>
+          <Exits school={this.state.school}/>
         }
       </>
     );

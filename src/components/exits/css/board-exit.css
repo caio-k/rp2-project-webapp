@@ -1,0 +1,124 @@
+.exit__container {
+    border-radius: 5px;
+    background-color: #EEEEEE;
+}
+
+.exit__container__header p:first-child {
+    color: #8B9A96;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px 0 0 15px;
+    padding-top: 10px;
+}
+
+.exit__container__header p:last-child {
+    color: #8B9A96;
+    font-size: 15px;
+    margin: 0 0 10px 15px;
+}
+
+.exit__container__content {
+    padding: 10px;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-side {
+    width: calc(50% - 2px);
+    border-radius: 5px;
+    padding: 5px;
+    height: 100%;
+}
+
+.left-side, .left-side thead {
+    background-color: var(--cor-bg-header-1);
+}
+
+.left-side table, .right-side table {
+    background-color: #FFFFFF;
+}
+
+.left-side thead {
+    color: #FFFFFF;
+}
+
+.left-side tbody td {
+    cursor: pointer;
+}
+
+.left-side tbody td > div {
+    border-radius: 5px;
+    padding-left: 5px;
+    background-color: #EEEEEE;
+}
+
+.left-side div {
+    background-color: white;
+    height: 100%;
+}
+
+.right-side {
+    background-color: white;
+    width: calc(50% - 2px);
+    border-radius: 5px;
+    border: 5px solid var(--cor-bg-header-1);
+    height: 100%;
+}
+
+.logs__box {
+    text-align: center;
+}
+
+.logs__box p {
+    padding: 5px;
+    font-weight: 500;
+}
+
+.tb__log {
+    height: 150px;
+}
+
+.release-btn {
+    padding: 2px;
+    background-color: var(--cor-bg-header-1);
+}
+
+.release-btn > button {
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 0 30px;
+    border-radius: 5px;
+    border: 1px solid #008e78;
+    background-color: #4cb0c3;
+}
+
+.not-selected {
+    font-size: 17px;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 815px) {
+    .exit__container__content {
+        height: 525px;
+        flex-direction: column;
+    }
+
+    .left-side, .right-side {
+        width: 100%;
+        min-height: 250px;
+        max-height: 250px;
+    }
+
+    .right-side {
+        margin-top: 5px;
+    }
+
+    .tb__log {
+        height: 170px;
+    }
+}
