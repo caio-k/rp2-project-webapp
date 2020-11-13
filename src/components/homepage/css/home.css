@@ -1,0 +1,40 @@
+.home__container{
+    background: var(--cor-words-2);
+    border-radius: 10px;
+    padding: 20px;
+    color: var(--cor-words-principal);
+    max-width: 1000px;
+    margin: auto;
+}
+
+.home__board{
+    width: 100%;
+    height: 400px;
+    background: var(--cor-bg-header-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.home__board img + p{
+    font-size: 30px;
+    padding: 10px;
+}
+
+.home__board + .home__two{
+    flex-direction: row-reverse;
+}
+
+.home__board-1{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.home__cadastrar{
+    display: flex;
+    justify-content: center;
+}
