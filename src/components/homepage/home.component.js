@@ -30,21 +30,21 @@ export default class Home extends Component {
       
         <div className=" home__board home__board-2">
             <img src={Img1} alt=""/>
-            <p>Aqui você poderá salvar suas escolas</p>
+            <p>Register your own school</p>
         </div>
 
         <div className=" home__board home__board-3 home__two">
             <img src={Img2} alt=""/>
-            <p>Cadastrar seus lugares favoritos</p>
+            <p>Save your favorite places</p>
         </div>
 
         <div className=" home__board home__board-4">
             <img src={Img3} alt=""/>
-            <p>Monitorar as saídas e muito mais</p>
+            <p>Monitor exits and more</p>
         </div>
 
         <div className="home__cadastrar">
-          <button onClick={()=>{history.push("/register")}}>Crei já sua conta</button>
+          <button onClick={()=>{history.push("/register")}}>Create your account!</button>
         </div>
       </div>
     );

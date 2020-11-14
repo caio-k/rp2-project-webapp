@@ -63,7 +63,7 @@ export default class BoardSchool extends Component {
           <Spinner/> :
           <div className="board">
             <div className="board-header">
-              <span>Choose a school</span>
+              <span>Select a school</span>
             </div>
 
             {schools.length > 0 && (
