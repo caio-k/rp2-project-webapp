@@ -169,7 +169,7 @@ export default class Places extends Component {
         return 'Drinking Fountain';
       case 'CUSTOM':
         return 'Custom';
-      case 'FAVORITE':
+      default:
         return 'Favorites';
     }
   }
