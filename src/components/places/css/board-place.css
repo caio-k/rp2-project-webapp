@@ -1,5 +1,4 @@
 .board__place__container{
-    height: calc(100vh - 150px);
     display: flex;
     justify-content: center;
 }

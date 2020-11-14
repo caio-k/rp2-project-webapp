@@ -76,6 +76,10 @@
     background-color: rgba(0, 136, 169, 0.8);
 }
 
+.site-content {
+    min-height: calc(100vh - 200px);
+}
+
 @media screen and (max-width: 815px) {
     .show-menu-btn, .hide-menu-btn {
         display: block;
