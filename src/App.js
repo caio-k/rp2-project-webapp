@@ -3,7 +3,9 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import logo from "./logo-oficial.png"
+import logo from "./logo-oficial.png";
+import menuIcon from "./assets/lista.svg";
+import close from "./assets/close.svg";
 
 import AuthService from "./services/auth.service";
 
@@ -15,6 +17,7 @@ import BoardExit from "./components/exits/board-exit.component";
 import BoardPlace from "./components/places/board-place.component";
 import BoardSchool from "./components/board-school.component";
 import UsePlace from "./components/places/places";
+import Footer from "./components/public/footer.component";
 
 class App extends Component {
   constructor(props) {
@@ -58,7 +61,12 @@ class App extends Component {
             />
             <input type="checkbox" id="chk"/>
             <label htmlFor="chk" className="show-menu-btn">
-              ...
+              <img
+                src={menuIcon}
+                alt='...'
+                width="30px"
+                height="30px"
+              />
             </label>
 
             <ul className="menu">
@@ -91,12 +99,17 @@ class App extends Component {
               )}
 
               <label htmlFor="chk" className="hide-menu-btn">
-                X
+                <img
+                  src={close}
+                  alt='X'
+                  width="25px"
+                  height="25px"
+                />
               </label>
             </ul>
           </div>
 
-          <div className="container mt-3">
+          <div className="container mt-3 site-content">
             <Switch>
               <Route exact path={["/", "/home"]} component={Home}/>
               <Route exact path="/login" component={Login}/>
@@ -108,6 +121,8 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin}/>
             </Switch>
           </div>
+
+          <Footer/>
         </div>
       </Router>
     );
