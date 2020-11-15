@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./css/home.css"
 import Img1 from "../../assets/create.jpg";
-import Img2 from "../../assets/favorite.jpg";
+import Img2 from "../../assets/favorites.jpg";
 import Img3 from "../../assets/exits.jpg";
 
 export default class Home extends Component {
