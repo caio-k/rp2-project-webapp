@@ -94,4 +94,8 @@
     .home__board p {
         text-align: center;
     }
+
+    .home__board h1 + p {
+        margin-top: 20px;
+    }
 }
