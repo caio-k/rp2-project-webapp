@@ -27,6 +27,7 @@
     align-items: center;
     width: 100%;
     height: 30px;
+    margin-top: 5px;
 }
 
 .choose__btn {
@@ -47,3 +48,4 @@
 .choose__img {
     max-width: 60%;
 }
+
