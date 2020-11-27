@@ -25,48 +25,87 @@ export default class Places extends Component {
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
-    PlaceService.listAllPlacesWithFavoriteBySchool(this.props.location.state.school.id, user.username).then(
-      res => {
-        const placesToRender = res.data.filter((item) => {
-          return item.type === this.props.location.state.type
-        });
+    if (this.props.location.state.type === "FAVORITE") {
+      PlaceService.listAllFavoritePlacesBySchool(this.props.location.state.school.id, user.username).then(
+        response => {
+          this.setState({
+            renderPlaces: response.data,
+            loading1: false
+          });
 
-        this.setState({
-          renderPlaces: placesToRender,
-          loading1: false
-        });
+          this.sortPlaces();
+        }
+      );
 
-        this.sortPlaces();
-      }
-    );
+      UsePlaceService.listAllUsesOfFavoritePlacesBySchool(user.username, this.props.location.state.school.id).then(
+        response => {
+          this.setState({
+            allUses: response.data,
+            loading2: false
+          });
+        }
+      );
+    } else {
+      PlaceService.listAllPlacesWithFavoriteBySchool(this.props.location.state.school.id, user.username).then(
+        res => {
+          const placesToRender = res.data.filter((item) => {
+            return item.type === this.props.location.state.type
+          });
 
-    UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
-      response => {
-        this.setState({
-          allUses: response.data,
-          loading2: false
-        });
-      }
-    );
+          this.setState({
+            renderPlaces: placesToRender,
+            loading1: false
+          });
+
+          this.sortPlaces();
+        }
+      );
+
+      UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
+        response => {
+          this.setState({
+            allUses: response.data,
+            loading2: false
+          });
+        }
+      );
+    }
   }
 
   refreshAllUses() {
+    const user = AuthService.getCurrentUser();
+
     this.setState({
       refreshing: true
     });
 
-    UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
-      response => {
-        this.setState({
-          allUses: response.data,
-          refreshing: false
-        });
+    if (this.props.location.state.type === "FAVORITE") {
+      UsePlaceService.listAllUsesOfFavoritePlacesBySchool(user.username, this.props.location.state.school.id).then(
+        response => {
+          this.setState({
+            allUses: response.data,
+            refreshing: false
+          });
 
-        this.state.renderPlaces.forEach(element => {
-          element.ref.loadData();
-        });
-      }
-    );
+          this.state.renderPlaces.forEach(element => {
+            element.ref.loadData();
+          });
+        }
+      );
+    } else {
+      UsePlaceService.listAllUses(this.props.location.state.type, this.props.location.state.school.id).then(
+        response => {
+          this.setState({
+            allUses: response.data,
+            refreshing: false
+          });
+
+          this.state.renderPlaces.forEach(element => {
+            element.ref.loadData();
+          });
+        }
+      );
+    }
   }
 
   getAllUsesByPlaceId(id) {
@@ -130,7 +169,7 @@ export default class Places extends Component {
         return 'Drinking Fountain';
       case 'CUSTOM':
         return 'Custom';
-      case 'FAVORITE':
+      default:
         return 'Favorites';
     }
   }

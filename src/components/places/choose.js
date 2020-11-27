@@ -6,6 +6,7 @@ import girlImg from '../../assets/girl.svg'
 import benchImg from '../../assets/bench.png'
 import drinkingImg from '../../assets/drinking.png'
 import customImg from '../../assets/custom.svg'
+import likeImg from '../../assets/like.svg'
 
 export default class ChoosePlace extends Component {
 
@@ -27,6 +28,12 @@ export default class ChoosePlace extends Component {
   render() {
     return (
       <div className="choose__container">
+        <div className="choose__group" style={{backgroundColor: "#D1345B"}}>
+          <h1 className="choose__title">Favorites</h1>
+          <button className="choose__btn" onClick={()=>{this.redirect('FAVORITE')}}>
+            <img src={likeImg} alt='Mens Bathroom' className="choose__img" />
+          </button>
+        </div>
         <div className="choose__group">
           <h1 className="choose__title">Men's Bathroom</h1>
           <button className="choose__btn" onClick={()=>{this.redirect('MEN_BATHROOM')}}>

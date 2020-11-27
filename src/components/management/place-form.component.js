@@ -12,7 +12,6 @@ export default class PlaceForm extends Component {
     this.onChangePlaceName = this.onChangePlaceName.bind(this);
     this.onChangePlaceType = this.onChangePlaceType.bind(this);
     this.onChangeMaxPeople = this.onChangeMaxPeople.bind(this);
-    this.onChangeTimeLimit = this.onChangeTimeLimit.bind(this);
     this.handleInsertPlace = this.handleInsertPlace.bind(this);
     this.handleUpdatePlace = this.handleUpdatePlace.bind(this);
 
@@ -21,7 +20,7 @@ export default class PlaceForm extends Component {
       placeName: this.props.placeInEvidence.name || "",
       placeType: this.props.placeInEvidence.type || "WOMEN_BATHROOM",
       maxPeople: this.props.placeInEvidence.maxPeople || 0,
-      timeLimit: this.props.placeInEvidence.limitTimeSeconds || 0,
+      timeLimit: 500, //default
       readOnly: this.props.readOnly || false,
       create: !this.props.placeInEvidence.name,
       message: "",
@@ -48,12 +47,6 @@ export default class PlaceForm extends Component {
     });
   }
 
-  onChangeTimeLimit(e) {
-    this.setState({
-      timeLimit: e.target.value
-    });
-  }
-
   handleInsertPlace(e) {
     e.preventDefault();
 
@@ -76,7 +69,6 @@ export default class PlaceForm extends Component {
               placeName: "",
               placeType: "WOMEN_BATHROOM",
               maxPeople: 0,
-              timeLimit: 0,
               message: "Place created successfully!",
               successful: true,
               submitting: false
@@ -168,9 +160,6 @@ export default class PlaceForm extends Component {
     } else if (this.state.maxPeople < 1) {
       this.setMessage("The maximum number of people must be greater than 1.", false);
       return false;
-    } else if (this.state.timeLimit < 120) {
-      this.setMessage("Timeout must be greater than 120 seconds.", false);
-      return false;
     }
     return true;
   }
@@ -225,19 +214,6 @@ export default class PlaceForm extends Component {
                 value={this.state.maxPeople}
                 autoComplete="off"
                 onChange={this.onChangeMaxPeople}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="timeLimit">Time limit in seconds</label>
-              <input
-                type="number"
-                disabled={this.state.readOnly}
-                className="form-control form-control-sm"
-                name="timeLimit"
-                value={this.state.timeLimit}
-                autoComplete="off"
-                onChange={this.onChangeTimeLimit}
               />
             </div>
 
