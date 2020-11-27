@@ -3,8 +3,10 @@ import ExitService from "../../services/exit.service"
 import AuthService from "../../services/auth.service"
 import Spinner from "../utils/spinner.component";
 import PopupMessage from "../utils/popup-message.component";
+import Modal from "../utils/modal.component"
 
 import "./css/board-exit.css"
+import ReleaseConfirmation from "./release-confirmation.component";
 
 export default class Exits extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ export default class Exits extends Component {
     this.renderRow = this.renderRow.bind(this);
     this.renderExitLog = this.renderExitLog.bind(this);
     this.releaseStudents = this.releaseStudents.bind(this);
+    this.setModalVisualization = this.setModalVisualization.bind(this);
 
     this.state = {
       exits: [],
@@ -22,7 +25,8 @@ export default class Exits extends Component {
       loadingLogs: false,
       alertStatus: false,
       message: "",
-      popupSuccess: false
+      popupSuccess: false,
+      isModalVisible: false
     };
   }
 
@@ -79,11 +83,16 @@ export default class Exits extends Component {
         filtered.push(response.data);
 
         this.setState({
-          exitLogs: filtered
+          exitLogs: filtered,
+          isModalVisible: false
         });
       },
       error => {
         this.handleError(error);
+
+        this.setState({
+          isModalVisible: false
+        });
       }
     )
   }
@@ -131,6 +140,12 @@ export default class Exits extends Component {
     )
   }
 
+  setModalVisualization(visible) {
+    this.setState({
+      isModalVisible: visible
+    });
+  }
+
   render() {
     return (
       <div>
@@ -144,6 +159,14 @@ export default class Exits extends Component {
 
         {!this.state.loading && (
           <div className="exit__container">
+            {this.state.isModalVisible && (
+              <Modal onClose={() => this.setModalVisualization(false)}>
+                <ReleaseConfirmation name={this.state.exitForExitLog.exitName}
+                                     handleRelease={() => this.releaseStudents()}
+                                     handleClose={() => this.setModalVisualization(false)}/>
+              </Modal>
+            )}
+
             <div className="exit__container__header">
               <p>{this.state.school.name}</p>
               <p>Exits</p>
@@ -184,7 +207,7 @@ export default class Exits extends Component {
                       </table>
                     </div>
                     <div className="release-btn">
-                      <button onClick={() => this.releaseStudents()}>Release Students</button>
+                      <button onClick={() => this.setModalVisualization(true)}>Release Students</button>
                     </div>
                   </div>
                 )}
