@@ -180,7 +180,7 @@ export default class Exits extends Component {
                   <table className="table table-sm table-hover">
                     <thead>
                     <tr>
-                      <td style={{fontWeight: "500", border: "none"}}>Choose an exit</td>
+                      <td style={{fontWeight: "500", border: "none"}}>Select an exit</td>
                     </tr>
                     </thead>
                     <tbody>
