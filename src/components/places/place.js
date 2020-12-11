@@ -132,7 +132,7 @@ export default class PlaceComponent extends Component {
 
     if (counter >= this.props.max) {
       element.classList.add("status--crowded")
-    } else if (counter >= this.props.max / 2) {
+    } else if (counter >= Math.floor(this.props.max * 0.7)) {
       element.classList.add("status--almost-full")
     } else {
       element.classList.add("status--safe")
